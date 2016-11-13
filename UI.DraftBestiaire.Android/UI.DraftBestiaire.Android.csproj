@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{FC49A044-CE41-40BF-8409-02409EA6103F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>UI.DraftBestiaire.Android</RootNamespace>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AssemblyName>DraftBestiaire</AssemblyName>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="Xamarin.Insights">
+      <HintPath>..\packages\Xamarin.Insights.1.11.4\lib\MonoAndroid10\Xamarin.Insights.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activities\BaseActivity.cs" />
+    <Compile Include="Adaptaters\SpinnerEditionsAdaptater.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Components\Menu\BaseActivityMenu.cs" />
+    <Compile Include="Components\Menu\GestureListener.cs" />
+    <Compile Include="Components\Menu\MenuItem.cs" />
+    <Compile Include="Components\Menu\MenuListAdapter.cs" />
+    <Compile Include="Components\Menu\MenuItemAction.cs" />
+    <Compile Include="Components\Menu\ResourcesMenu.cs" />
+    <Compile Include="Activities\IntroActivity.cs" />
+    <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Fragments\AboutFragment.cs" />
+    <Compile Include="Fragments\BaseFragment.cs" />
+    <Compile Include="Fragments\DebugFragment.cs" />
+    <Compile Include="Fragments\DisplayEditionFragment.cs" />
+    <Compile Include="Fragments\MainFragment.cs" />
+    <Compile Include="Fragments\PlaneswalkerPointsFragment.cs" />
+    <Compile Include="Fragments\RankingFragment.cs" />
+    <Compile Include="Fragments\SettingsFragment.cs" />
+    <Compile Include="Adaptaters\SpinnerDraftsAdaptater.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Assets\AboutAssets.txt" />
+    <None Include="packages.config" />
+    <AndroidAsset Include="Assets\data\gatherer\bestiaire_editions.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_2ED.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_3ED.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_4ED.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_5DN.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_5ED.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_6ED.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_7ED.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_8ED.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_9ED.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_10E.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ALA.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ALL.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_APC.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ARB.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ARN.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ATQ.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_AVR.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_BD.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_BFZ.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_BNG.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_BOK.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_BRB.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_CHK.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_CHR.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_CON.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_CSP.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_CU2.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_CUB.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_DGM.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_DIS.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_DKA.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_DRK.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_DST.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_DTK.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_EVE.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_EXO.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_FEM.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_FRF.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_FUT.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_GPT.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_GTC.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_HML.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ICE.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_INV.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ISD.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_JOU.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_JUD.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_KTK.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_LEA.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_LEB.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_LEG.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_LGN.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_LRW.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_M10.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_M11.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_M12.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_M13.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_M14.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_M15.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_MBS.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ME3.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_MIR.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_MM2.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_MMA.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_MMQ.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_MOR.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_MRD.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_NMS.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_NPH.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ODY.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_OGW.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ONS.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ORI.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_PCY.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_PLC.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_PLS.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_PO2.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_POR.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_PTK.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_RAV.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ROE.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_RTR.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_S99.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_SCG.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_SHM.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_SOK.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_SOM.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_STH.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_THS.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_TMP.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_TOR.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_TSP.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_UDS.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_UGL.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ULG.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_UNH.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_USG.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_VIS.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_WTH.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_WWK.json" />
+    <AndroidAsset Include="Assets\data\gatherer\mtgjson_ZEN.json" />
+    <AndroidAsset Include="Assets\data\bestiaire\bestiaire_BFZ.json" />
+    <AndroidAsset Include="Assets\data\bestiaire\bestiaire_drafts.json" />
+    <AndroidAsset Include="Assets\data\bestiaire\bestiaire_editions.json" />
+    <AndroidAsset Include="Assets\data\bestiaire\bestiaire_OGW.json" />
+    <AndroidAsset Include="Assets\data\bestiaire\bestiaire_ORI.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Activity_Intro.axml" />
+    <AndroidResource Include="Resources\layout\Activity_Main.axml" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\down_arrow.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_icon.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\up_arrow.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_about.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_close.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_settings.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_search.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_ranking.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_home.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_dci.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\menu_settings.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\menu_search.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\menu_ranking.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\menu_home.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\menu_dci.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\menu_close.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\menu_about.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\menu_settings.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\menu_search.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\menu_ranking.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\menu_home.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\menu_dci.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\menu_close.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\menu_about.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu_settings.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu_search.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu_ranking.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu_home.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu_dci.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu_close.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu_about.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu_settings.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu_search.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu_ranking.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu_home.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu_dci.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu_close.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu_about.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\menu_debug.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\menu_debug.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\menu_debug.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\menu_debug.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\menu_debug.png" />
+    <AndroidResource Include="Resources\layout\Fragment_Main.axml" />
+    <AndroidResource Include="Resources\layout\Fragment_DisplayEdition.axml" />
+    <AndroidResource Include="Resources\layout\Fragment_Ranking.axml" />
+    <AndroidResource Include="Resources\layout\Fragment_PlaneswalkerPoints.axml" />
+    <AndroidResource Include="Resources\layout\Fragment_Settings.axml" />
+    <AndroidResource Include="Resources\layout\Fragment_About.axml" />
+    <AndroidResource Include="Resources\layout\Fragment_Debug.axml" />
+    <AndroidResource Include="Resources\layout\Fragment_Menu_Item.axml" />
+    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\layout\Spinner_Drafts.xml" />
+    <AndroidResource Include="Resources\layout\Spinner_Drafts_Selection.xml" />
+    <AndroidResource Include="Resources\layout\Spinner_Editions.xml" />
+    <AndroidResource Include="Resources\layout\Spinner_Editions_Selection.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\drawable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Android\Common.Android.csproj">
+      <Project>{7F49AD07-D46F-41B0-A42B-C0FE3D24FC6D}</Project>
+      <Name>Common.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.AsyncTasks.Android\Common.AsyncTasks.Android.csproj">
+      <Project>{6813E51E-97DB-45F4-91C0-CDEA33B9F650}</Project>
+      <Name>Common.AsyncTasks.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Objects.Bestiaire\Objects.Bestiaire.csproj">
+      <Project>{2CD2B6D3-39D9-4F3C-B32B-BE3DCB9F4F2D}</Project>
+      <Name>Objects.Bestiaire</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Business.Resources\Business.Resources.csproj">
+      <Project>{63DA50FE-942C-4078-9BE1-AA5DC970C56B}</Project>
+      <Name>Business.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Objects.MtgJson\Objects.MtgJson.csproj">
+      <Project>{C5C1E3F6-2DCE-4224-B679-D9CAC4932302}</Project>
+      <Name>Objects.MtgJson</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI.MtgLifeCounter.Android\UI.MtgLifeCounter.Android.csproj">
+      <Project>{975EF158-52E1-4F6A-9AAE-D50966A32ADE}</Project>
+      <Name>UI.MtgLifeCounter.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets')" />
+</Project>

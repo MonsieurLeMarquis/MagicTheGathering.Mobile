@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4510E546-A2BB-4B0F-BF3B-DEC66A36C8AB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MTG.DataExtractor.Business</RootNamespace>
+    <AssemblyName>MTG.DataExtractor.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bestiaire.cs" />
+    <Compile Include="Constants\Repertoires.cs" />
+    <Compile Include="Constants\Url.cs" />
+    <Compile Include="Debug\Bestiaire_Edition.cs" />
+    <Compile Include="Debug\ProcessDebug.cs" />
+    <Compile Include="Gatherer.cs" />
+    <Compile Include="Helpers\HelperLoadEdition.cs" />
+    <Compile Include="Helpers\HelperPath.cs" />
+    <Compile Include="Hybrid.cs" />
+    <Compile Include="MtgJson.cs" />
+    <Compile Include="Obsolete\DownloadObsolete.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules.cs" />
+    <Compile Include="Statistics\BusinessStatistics.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MTG.DataExtractor.Files\MTG.DataExtractor.Files.csproj">
+      <Project>{8F9A09A8-A13C-48EF-B0D7-AF5801456E9D}</Project>
+      <Name>MTG.DataExtractor.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MTG.DataExtractor.Network\MTG.DataExtractor.Network.csproj">
+      <Project>{E23F4D78-B671-4D51-B567-00281970B437}</Project>
+      <Name>MTG.DataExtractor.Network</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MTG.DataExtractor.Objects\MTG.DataExtractor.Objects.csproj">
+      <Project>{1B5603D1-00CB-4025-93C4-71C80D078D21}</Project>
+      <Name>MTG.DataExtractor.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MTG.DataExtractor.Report\MTG.DataExtractor.Report.csproj">
+      <Project>{7DF5347E-A527-4951-9121-EAD9C5C08453}</Project>
+      <Name>MTG.DataExtractor.Report</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MTG.DataExtractor.Resources\MTG.DataExtractor.Resources.csproj">
+      <Project>{4FABA2C6-5615-4B61-840D-CC82D9F9A48F}</Project>
+      <Name>MTG.DataExtractor.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Statistics\" />
+  </ItemGroup>
+</Project>

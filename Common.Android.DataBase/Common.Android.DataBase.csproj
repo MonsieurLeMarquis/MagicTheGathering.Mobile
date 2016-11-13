@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{AF1EF314-BCC7-473F-BFC2-8BF727FAD215}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Common.Android.DataBase</RootNamespace>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AssemblyName>Common.Android.DataBase</AssemblyName>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Managers\BaseManagerDataBase.cs" />
+    <Compile Include="Managers\ManagerDataBaseBestiaire.cs" />
+    <Compile Include="Objects\BaseObjectBDD.cs" />
+    <Compile Include="Objects\Bestiaire\CardBDD.cs" />
+    <Compile Include="Objects\Bestiaire\DraftBDD.cs" />
+    <Compile Include="Objects\Bestiaire\EditionBDD.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Objects.Bestiaire\Objects.Bestiaire.csproj">
+      <Project>{2CD2B6D3-39D9-4F3C-B32B-BE3DCB9F4F2D}</Project>
+      <Name>Objects.Bestiaire</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataBase\DataBase.csproj">
+      <Project>{959DFC2C-6D1A-4E13-A91B-99FD7032B480}</Project>
+      <Name>DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataBase.Bestiaire\DataBase.Bestiaire.csproj">
+      <Project>{866594C3-13FB-4013-B822-9681BBFA5CDB}</Project>
+      <Name>DataBase.Bestiaire</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataBase.Gatherer\DataBase.Gatherer.csproj">
+      <Project>{593FB045-1FCC-406F-84B3-EC0DB7ADF679}</Project>
+      <Name>DataBase.Gatherer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Objects.MtgJson\Objects.MtgJson.csproj">
+      <Project>{C5C1E3F6-2DCE-4224-B679-D9CAC4932302}</Project>
+      <Name>Objects.MtgJson</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

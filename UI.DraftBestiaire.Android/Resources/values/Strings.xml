@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Go to main activity!</string>
+	<string name="app_name">DraftBestiaire</string>
+	<string name="Home">Home</string>
+	<string name="AboutUs">AboutUs</string>
+	<string name="Products">Products</string>
+	<string name="Events">Events</string>
+	<string name="Service">Service</string>
+	<string name="Clients">Clients</string>
+	<string name="Help">Help</string>
+	<string name="Solution">Solution</string>
+	<string name="ContactUs">ContactUs</string>
+
+
+
+	<string name="menu_about">About</string>
+	<string name="menu_close">Close</string>
+	<string name="menu_debug">Debug</string>
+	<string name="menu_display_edition">Display edition</string>
+	<string name="menu_play_draft">Play draft</string>
+	<string name="menu_planeswalker_points">Planeswalker points</string>
+	<string name="menu_ranking">Ranking</string>
+	<string name="menu_settings">Settings</string>
+
+
+</resources>

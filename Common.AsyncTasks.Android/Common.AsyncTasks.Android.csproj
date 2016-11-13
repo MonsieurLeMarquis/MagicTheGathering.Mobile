@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{6813E51E-97DB-45F4-91C0-CDEA33B9F650}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Common.AsyncTasks</RootNamespace>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AssemblyName>Common.AsyncTasks</AssemblyName>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activities\ActivityDataBaseInstallation.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\Installation\AsyncTaskDataBaseInstallation.cs" />
+    <Compile Include="Tasks\BaseAsyncTask.cs" />
+    <Compile Include="Tasks\Load\DataBase\AsyncTaskDataBaseBestiaireCards.cs" />
+    <Compile Include="Tasks\Load\DataBase\AsyncTaskDataBaseBestiaireDrafts.cs" />
+    <Compile Include="Tasks\Load\DataBase\AsyncTaskDataBaseBestiaireEditions.cs" />
+    <Compile Include="Tasks\Load\DataBase\AsyncTaskDataBaseGathererCards.cs" />
+    <Compile Include="Tasks\Load\DataBase\AsyncTaskDataBaseGathererEditions.cs" />
+    <Compile Include="Tasks\Load\DataBase\AsyncTaskDataBaseGathererDrafts.cs" />
+    <Compile Include="Tasks\Load\Files\AsyncTaskFilesBestiaireCards.cs" />
+    <Compile Include="Tasks\Load\Files\AsyncTaskFilesBestiaireDrafts.cs" />
+    <Compile Include="Tasks\Load\Files\AsyncTaskFilesGathererEditions.cs" />
+    <Compile Include="Tasks\Load\Files\AsyncTaskFilesGathererDrafts.cs" />
+    <Compile Include="Tasks\Load\Files\AsyncTaskFilesGathererCards.cs" />
+    <Compile Include="Tasks\Load\Files\AsyncTaskFilesBestiaireEditions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Resources\AboutResources.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Android\Common.Android.csproj">
+      <Project>{7F49AD07-D46F-41B0-A42B-C0FE3D24FC6D}</Project>
+      <Name>Common.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common.Android.DataBase\Common.Android.DataBase.csproj">
+      <Project>{AF1EF314-BCC7-473F-BFC2-8BF727FAD215}</Project>
+      <Name>Common.Android.DataBase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI.MtgLifeCounter.Android\UI.MtgLifeCounter.Android.csproj">
+      <Project>{975EF158-52E1-4F6A-9AAE-D50966A32ADE}</Project>
+      <Name>UI.MtgLifeCounter.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+</Project>

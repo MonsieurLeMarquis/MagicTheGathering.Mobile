@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{221AC9C1-DC96-416C-A1BE-8E21708AD7E9}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>MTG.DataExtractor.Console</RootNamespace>
+    <AssemblyName>MTG.DataExtractor.Console</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Arguments\Arguments.cs" />
+    <Compile Include="Arguments\Enums.cs" />
+    <Compile Include="Arguments\ManageArguments.cs" />
+    <Compile Include="Arguments\ManageEnums.cs" />
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\Error.cs" />
+    <Compile Include="Commands\Help.cs" />
+    <Compile Include="Commands\List.cs" />
+    <Compile Include="Commands\Load.cs" />
+    <Compile Include="Commands\ManageCommand.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MTG.DataExtractor.Business\MTG.DataExtractor.Business.csproj">
+      <Project>{4510E546-A2BB-4B0F-BF3B-DEC66A36C8AB}</Project>
+      <Name>MTG.DataExtractor.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MTG.DataExtractor.Files\MTG.DataExtractor.Files.csproj">
+      <Project>{8F9A09A8-A13C-48EF-B0D7-AF5801456E9D}</Project>
+      <Name>MTG.DataExtractor.Files</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MTG.DataExtractor.Objects\MTG.DataExtractor.Objects.csproj">
+      <Project>{1B5603D1-00CB-4025-93C4-71C80D078D21}</Project>
+      <Name>MTG.DataExtractor.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MTG.DataExtractor.Utils\MTG.DataExtractor.Utils.csproj">
+      <Project>{E5AF49AF-2E08-44D3-8B94-75FCFED2E5F1}</Project>
+      <Name>MTG.DataExtractor.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

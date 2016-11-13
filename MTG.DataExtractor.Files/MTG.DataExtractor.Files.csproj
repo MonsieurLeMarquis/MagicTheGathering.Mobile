@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8F9A09A8-A13C-48EF-B0D7-AF5801456E9D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>MTG.DataExtractor.Files</RootNamespace>
+    <AssemblyName>MTG.DataExtractor.Files</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\..\VisualStudio\MTG.DataExtractor\MTG.DataExtractor.Files\DLL\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\VisualStudio\MTG.DataExtractor\MTG.DataExtractor.Files\DLL\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fichier.cs" />
+    <Compile Include="Format\DocxToText.cs" />
+    <Compile Include="Format\Excel.cs" />
+    <Compile Include="Format\Jpeg.cs" />
+    <Compile Include="Format\Json.cs" />
+    <Compile Include="Format\PdfParser.cs" />
+    <Compile Include="Format\Sql.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DLL\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="DLL\itextsharp.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MTG.DataExtractor.Objects\MTG.DataExtractor.Objects.csproj">
+      <Project>{1B5603D1-00CB-4025-93C4-71C80D078D21}</Project>
+      <Name>MTG.DataExtractor.Objects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MTG.DataExtractor.Resources\MTG.DataExtractor.Resources.csproj">
+      <Project>{4FABA2C6-5615-4B61-840D-CC82D9F9A48F}</Project>
+      <Name>MTG.DataExtractor.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>
