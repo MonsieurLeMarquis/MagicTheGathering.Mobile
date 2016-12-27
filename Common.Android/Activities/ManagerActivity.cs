@@ -17,40 +17,24 @@ namespace Common.Android.Activities
 
         public static void SetFullScreen(Activity activity)
         {
-            // Barre de statut (heure, icône 3G / niveau batterie / ...
-            HideStatusBar(activity);
-            // Barre de titre de l'application + Three Dots Menu
-            HideActionBar(activity);
-            // Barre avec les boutons de navigation en bas de l'écran
-            HideNavigationBar(activity);
+            //  FLAG optimal = 7942
+            //  -------------------
+            //  2       Hide Navigation
+            //  4       Fullscreen
+            //  256     Layout Stable
+            //  512     Layout Hide Navigation
+            //  1024    Layout Fullscreen
+            //  2048    Immersive
+            //  4096    Immersive Sticky
+            int flag = (int)SystemUiFlags.HideNavigation;
+            flag += (int)SystemUiFlags.Fullscreen;
+            flag += (int)SystemUiFlags.LayoutStable;
+            flag += (int)SystemUiFlags.LayoutHideNavigation;
+            flag += (int)SystemUiFlags.LayoutFullscreen;
+            flag += (int)SystemUiFlags.Immersive;
+            flag += (int)SystemUiFlags.ImmersiveSticky;
+            activity.Window.DecorView.SystemUiVisibility = (StatusBarVisibility)flag;
         }
-
-        public static void HideStatusBar(Activity activity)
-        {
-            activity.Window.AddFlags(WindowManagerFlags.Fullscreen);
-        }
-
-        public static void HideActionBar(Activity activity)
-        {
-            activity.ActionBar.Hide();
-        }
-
-        public static void HideNavigationBar(Activity activity)
-        {
-            View decorView = activity.Window.DecorView;
-            var uiOptions = (int)decorView.SystemUiVisibility;
-            var newUiOptions = (int)uiOptions;
-
-            //newUiOptions |= (int)SystemUiFlags.LowProfile;
-            //newUiOptions |= (int)SystemUiFlags.Fullscreen;
-            newUiOptions |= (int)SystemUiFlags.HideNavigation;
-            //newUiOptions |= (int)SystemUiFlags.Immersive;
-
-            decorView.SystemUiVisibility = (StatusBarVisibility)newUiOptions;
-        }
-
-
-
 
         public static void ActivateKeepScreenOn(Activity activity)
         {

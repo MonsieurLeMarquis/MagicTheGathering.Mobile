@@ -11,6 +11,9 @@ using System.Collections.Generic;
 using UI.MtgLifeCounter.Android.Fragments;
 using Common.Android.Activities;
 using Android.Content.PM;
+using Business.MtgLifeCounter.Objects;
+using Business.MtgLifeCounter.Managers;
+using UI.MtgLifeCounter.Android.Drawings;
 
 namespace UI.MtgLifeCounter.Android.Activities
 {
@@ -21,6 +24,8 @@ namespace UI.MtgLifeCounter.Android.Activities
 
         private GestureDetector _gestureDetector;
 
+        private Screen _screen;
+
         protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
@@ -28,6 +33,11 @@ namespace UI.MtgLifeCounter.Android.Activities
             SetContentView (Resource.Layout.Activity_Main);
 			InitializeMenu (ResourcesMenu.ListMenuItems(this));
             _gestureDetector = new GestureDetector(this);
+
+
+            _screen = ManagerWidgets.CreateWidgets(this);
+            ManagerDrawing.DrawScreen(_screen);
+
         }
 
         #region GESTURE LISTENER

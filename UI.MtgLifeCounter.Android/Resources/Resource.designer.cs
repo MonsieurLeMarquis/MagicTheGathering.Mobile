@@ -26,6 +26,8 @@ namespace UI.MtgLifeCounter.Android
 		
 		public static void UpdateIdValues()
 		{
+			global::Business.MtgLifeCounter.Resource.String.ApplicationName = global::UI.MtgLifeCounter.Android.Resource.String.ApplicationName;
+			global::Business.MtgLifeCounter.Resource.String.Hello = global::UI.MtgLifeCounter.Android.Resource.String.Hello;
 			global::Common.Android.Resource.String.ApplicationName = global::UI.MtgLifeCounter.Android.Resource.String.ApplicationName;
 			global::Common.Android.Resource.String.Hello = global::UI.MtgLifeCounter.Android.Resource.String.Hello;
 		}
@@ -120,71 +122,41 @@ namespace UI.MtgLifeCounter.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080001
-			public const int btnFullscreen = 2131230721;
-			
-			// aapt resource value: 0x7f080002
-			public const int btnHideNavigation = 2131230722;
-			
-			// aapt resource value: 0x7f080012
-			public const int btnImgExpander = 2131230738;
-			
-			// aapt resource value: 0x7f080003
-			public const int btnImmersive = 2131230723;
-			
-			// aapt resource value: 0x7f080004
-			public const int btnImmersiveSticky = 2131230724;
-			
-			// aapt resource value: 0x7f080005
-			public const int btnLayoutFlags = 2131230725;
+			// aapt resource value: 0x7f080008
+			public const int btnImgExpander = 2131230728;
 			
 			// aapt resource value: 0x7f080006
-			public const int btnLayoutFullscreen = 2131230726;
-			
-			// aapt resource value: 0x7f080007
-			public const int btnLayoutHideNavigation = 2131230727;
-			
-			// aapt resource value: 0x7f080008
-			public const int btnLayoutStable = 2131230728;
-			
-			// aapt resource value: 0x7f080009
-			public const int btnLowProfile = 2131230729;
+			public const int frame_container = 2131230726;
 			
 			// aapt resource value: 0x7f08000a
-			public const int btnVisible = 2131230730;
+			public const int ivMenuImg = 2131230730;
 			
-			// aapt resource value: 0x7f080010
-			public const int frame_container = 2131230736;
+			// aapt resource value: 0x7f080002
+			public const int menuIconImgView = 2131230722;
 			
-			// aapt resource value: 0x7f080014
-			public const int ivMenuImg = 2131230740;
-			
-			// aapt resource value: 0x7f08000c
-			public const int menuIconImgView = 2131230732;
-			
-			// aapt resource value: 0x7f080013
-			public const int menuListView = 2131230739;
+			// aapt resource value: 0x7f080009
+			public const int menuListView = 2131230729;
 			
 			// aapt resource value: 0x7f080000
 			public const int myButton = 2131230720;
 			
+			// aapt resource value: 0x7f080001
+			public const int titleBarLinearLayout = 2131230721;
+			
+			// aapt resource value: 0x7f080003
+			public const int txtActionBarText = 2131230723;
+			
+			// aapt resource value: 0x7f080004
+			public const int txtActionBarText2 = 2131230724;
+			
+			// aapt resource value: 0x7f080005
+			public const int txtActionBarText3 = 2131230725;
+			
+			// aapt resource value: 0x7f080007
+			public const int txtDescription = 2131230727;
+			
 			// aapt resource value: 0x7f08000b
-			public const int titleBarLinearLayout = 2131230731;
-			
-			// aapt resource value: 0x7f08000d
-			public const int txtActionBarText = 2131230733;
-			
-			// aapt resource value: 0x7f08000e
-			public const int txtActionBarText2 = 2131230734;
-			
-			// aapt resource value: 0x7f08000f
-			public const int txtActionBarText3 = 2131230735;
-			
-			// aapt resource value: 0x7f080011
-			public const int txtDescription = 2131230737;
-			
-			// aapt resource value: 0x7f080015
-			public const int txtMnuText = 2131230741;
+			public const int txtMnuText = 2131230731;
 			
 			static Id()
 			{

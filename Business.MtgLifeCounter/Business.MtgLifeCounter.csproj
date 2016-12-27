@@ -3,17 +3,19 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F49AD07-D46F-41B0-A42B-C0FE3D24FC6D}</ProjectGuid>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D3DA93A2-989D-489C-A443-A1348F75C01E}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Common.Android</RootNamespace>
-    <AssemblyName>Common.Android</AssemblyName>
+    <RootNamespace>Business.MtgLifeCounter</RootNamespace>
+    <AssemblyName>Business.MtgLifeCounter</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,18 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\ManagerActivity.cs" />
-    <Compile Include="Debug\BaseTrace.cs" />
-    <Compile Include="Debug\Error.cs" />
-    <Compile Include="Debug\Log.cs" />
-    <Compile Include="Debug\ManagerTraces.cs" />
-    <Compile Include="Drawing\ManagerDrawing.cs" />
-    <Compile Include="Fragments\ManagerFragment.cs" />
-    <Compile Include="Resolution\ManagerScreen.cs" />
+    <Compile Include="Constants\Constants.cs" />
+    <Compile Include="Managers\ManagerSize.cs" />
+    <Compile Include="Managers\ManagerWidgets.cs" />
+    <Compile Include="Objects\BaseWidget.cs" />
+    <Compile Include="Objects\Screen.cs" />
+    <Compile Include="Objects\ZonePlayer.cs" />
+    <Compile Include="Objects\Score.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="IO\File.cs" />
-    <Compile Include="IO\Directory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -61,6 +60,12 @@
     <AndroidResource Include="Resources\Values\Strings.xml" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Common.Android\Common.Android.csproj">
+      <Project>{7f49ad07-d46f-41b0-a42b-c0fe3d24fc6d}</Project>
+      <Name>Common.Android</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
