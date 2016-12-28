@@ -8,7 +8,7 @@ namespace UI.MtgLifeCounter.Android.Drawings
 
         public static void DrawScreen(Screen screen)
         {
-            Drawing.ManagerDrawing.DrawTextView();
+            //Drawing.ManagerDrawing.DrawTextView();
         }
 
     }

@@ -24,7 +24,10 @@ namespace UI.MtgLifeCounter.Android.Activities
 
         private GestureDetector _gestureDetector;
 
+        private FrameLayout _frameLayout;
+
         private Screen _screen;
+
 
         protected override void OnCreate (Bundle savedInstanceState)
 		{
@@ -34,6 +37,12 @@ namespace UI.MtgLifeCounter.Android.Activities
 			InitializeMenu (ResourcesMenu.ListMenuItems(this));
             _gestureDetector = new GestureDetector(this);
 
+
+            _frameLayout = FindViewById<FrameLayout>(Resource.Id.frame_container);
+
+            var textView = Common.Android.Drawing.ManagerDrawing.DrawTextView(this);
+            textView = Common.Android.Drawing.ManagerDrawing.SetText(textView, "TEST", 20, new Color(255, 255, 255));
+            Common.Android.Drawing.ManagerDrawing.ShowTextView(textView, 200, 200, 200, 200, _frameLayout);
 
             _screen = ManagerWidgets.CreateWidgets(this);
             ManagerDrawing.DrawScreen(_screen);
