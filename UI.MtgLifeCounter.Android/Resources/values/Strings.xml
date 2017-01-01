@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="hello">Go to main activity!</string>
-	<string name="app_name">DraftBestiaire</string>
+	<string name="app_name">MTG Game Manager</string>
 	<string name="Home">Home</string>
 	<string name="AboutUs">AboutUs</string>
 	<string name="Products">Products</string>

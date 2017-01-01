@@ -51,6 +51,7 @@
     <Compile Include="Drawings\Colors.cs" />
     <Compile Include="Drawings\ManagerDrawing.cs" />
     <Compile Include="Drawings\Themes.cs" />
+    <Compile Include="Gesture\ManagerGesture.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Menu\BaseActivityMenu.cs" />

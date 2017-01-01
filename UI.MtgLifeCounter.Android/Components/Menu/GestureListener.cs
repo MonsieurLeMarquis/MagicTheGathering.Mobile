@@ -4,12 +4,14 @@ using Android.Views;
 namespace UI.MtgLifeCounter.Android.Components.Menu
 {
 
-	class GestureListener: Java.Lang.Object, GestureDetector.IOnGestureListener
+	public class GestureListener: Java.Lang.Object, GestureDetector.IOnGestureListener
 	{
-		
-		public event Action LeftEvent;
-		public event Action RightEvent;
-		public event Action SingleTapEvent;
+
+        public event Action LeftEvent;
+        public event Action RightEvent;
+        public event Action UpEvent;
+        public event Action DownEvent;
+        public event Action SingleTapEvent;
 		static int SWIPE_MAX_OFF_PATH = 250;
 		static int SWIPE_MIN_DISTANCE = 100;
 		static int SWIPE_THRESHOLD_VELOCITY = 200;
@@ -22,6 +24,7 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 		{
 			try
 			{
+                // TODO : ajouter UpEvent et DownEvent
 				if ( Math.Abs ( e1.GetY () - e2.GetY () ) > SWIPE_MAX_OFF_PATH )
 					return false;
 				// right to left swipe
@@ -31,7 +34,6 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 				}
 				else if ( e2.GetX () - e1.GetX () > SWIPE_MIN_DISTANCE && Math.Abs ( velocityX ) > SWIPE_THRESHOLD_VELOCITY && RightEvent != null )
 				{
-					//left to right swipe
 					if(e1.GetX()<100)
 						LeftEvent ();
 				}
