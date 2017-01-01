@@ -8,7 +8,7 @@ namespace Business.MtgLifeCounter.Managers
 
         public static int GetOptimalSize(double sizePercentage, Activity activity)
         {
-            return GetOptimalSize(sizePercentage, ManagerScreen.PixelsHeight(activity), ManagerScreen.PixelsWidth(activity));
+            return GetOptimalSize(sizePercentage, ManagerResolution.PixelsHeight(activity), ManagerResolution.PixelsWidth(activity));
         }
 
         public static int GetOptimalSize(double sizePercentage, int height, int width)

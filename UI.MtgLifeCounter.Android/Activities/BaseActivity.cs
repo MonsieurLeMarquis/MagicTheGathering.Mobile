@@ -14,12 +14,13 @@ namespace UI.MtgLifeCounter.Android.Activities
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            //ManagerActivity.SetFullScreen(this);
+            ManagerActivity.SetFullScreen(this);
         }
 
         protected override void OnResume()
         {
             base.OnResume();
+            ManagerActivity.SetFullScreen(this);
             ManagerActivity.ActivateKeepScreenOn(this);
         }
 

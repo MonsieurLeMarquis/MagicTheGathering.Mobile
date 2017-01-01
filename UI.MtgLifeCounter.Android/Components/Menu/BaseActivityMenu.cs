@@ -106,6 +106,20 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 				switch (action.TypeAction) {
 					case MenuItemAction.TYPE_ACTION.LOAD_FRAGMENT:
 						if ((Fragment)action.GetScreenInstance () is Fragment) {
+                            // Affichage ou non du fragment principal et du fragment secondaire
+                            var frameMain = FindViewById<FrameLayout>(Resource.Id.frame_main);
+                            var frameContainer = FindViewById<FrameLayout>(Resource.Id.frame_container);
+                            if (strMenuText == Resources.GetString(Resource.String.menu_main) && frameMain != null && frameContainer != null)
+                            {
+                                frameMain.Visibility = ViewStates.Visible;
+                                frameContainer.Visibility = ViewStates.Gone;
+                            }
+                            else
+                            {
+                                frameMain.Visibility = ViewStates.Gone;
+                                frameContainer.Visibility = ViewStates.Visible;
+                            }
+                            // Lancement du fragment
 							ManagerFragment.Launch (base.FragmentManager, (Fragment)action.GetScreenInstance (), Resource.Id.frame_container);	
 						}
 						break;

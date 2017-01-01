@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\BaseActivity.cs" />
+    <Compile Include="Drawings\Colors.cs" />
     <Compile Include="Drawings\ManagerDrawing.cs" />
+    <Compile Include="Drawings\Themes.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Menu\BaseActivityMenu.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Fragments\SettingsFragment.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\Fonts\ComicBook.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
@@ -121,12 +124,13 @@
     <AndroidResource Include="Resources\layout\Fragment_About.axml" />
     <AndroidResource Include="Resources\layout\Fragment_Settings.axml" />
     <AndroidResource Include="Resources\drawable-hdpi\down_arrow.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
     <AndroidResource Include="Resources\drawable-hdpi\menu_icon.png" />
     <AndroidResource Include="Resources\drawable-hdpi\up_arrow.png" />
     <AndroidResource Include="Resources\layout\Fragment_Dice.axml" />
     <AndroidResource Include="Resources\layout\Fragment_Help.axml" />
-    <AndroidResource Include="Resources\layout\Fragment_History.axml" />
+    <AndroidResource Include="Resources\layout\Fragment_History.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\Fragment_Rate.axml" />
     <AndroidResource Include="Resources\layout\Fragment_Reload.axml" />
     <AndroidResource Include="Resources\layout\Fragment_Rules.axml" />
@@ -140,7 +144,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\menu_debug.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\drawable\" />
+    <AndroidResource Include="Resources\drawable\application.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Business.MtgLifeCounter\Business.MtgLifeCounter.csproj">
@@ -157,6 +161,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Colors.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\wallpaper_opponent.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\wallpaper_player.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets" Condition="Exists('..\packages\Xamarin.Insights.1.11.4\build\MonoAndroid10\Xamarin.Insights.targets')" />

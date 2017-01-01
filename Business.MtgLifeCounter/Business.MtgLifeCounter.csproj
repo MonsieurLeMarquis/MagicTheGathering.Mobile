@@ -44,9 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\Constants.cs" />
+    <Compile Include="Managers\ManagerScreen.cs" />
     <Compile Include="Managers\ManagerSize.cs" />
     <Compile Include="Managers\ManagerWidgets.cs" />
     <Compile Include="Objects\BaseWidget.cs" />
+    <Compile Include="Objects\PlayerName.cs" />
+    <Compile Include="Objects\Position.cs" />
     <Compile Include="Objects\Screen.cs" />
     <Compile Include="Objects\ZonePlayer.cs" />
     <Compile Include="Objects\Score.cs" />

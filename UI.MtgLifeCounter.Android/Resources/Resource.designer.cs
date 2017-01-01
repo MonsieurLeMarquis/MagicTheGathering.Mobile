@@ -65,49 +65,58 @@ namespace UI.MtgLifeCounter.Android
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int down_arrow = 2130837504;
+			public const int application = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int Icon = 2130837505;
+			public const int down_arrow = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int menu_about = 2130837506;
+			public const int Icon = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int menu_close = 2130837507;
+			public const int menu_about = 2130837507;
 			
 			// aapt resource value: 0x7f020004
-			public const int menu_debug = 2130837508;
+			public const int menu_close = 2130837508;
 			
 			// aapt resource value: 0x7f020005
-			public const int menu_dice = 2130837509;
+			public const int menu_debug = 2130837509;
 			
 			// aapt resource value: 0x7f020006
-			public const int menu_help = 2130837510;
+			public const int menu_dice = 2130837510;
 			
 			// aapt resource value: 0x7f020007
-			public const int menu_history = 2130837511;
+			public const int menu_help = 2130837511;
 			
 			// aapt resource value: 0x7f020008
-			public const int menu_icon = 2130837512;
+			public const int menu_history = 2130837512;
 			
 			// aapt resource value: 0x7f020009
-			public const int menu_rate = 2130837513;
+			public const int menu_icon = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int menu_reload = 2130837514;
+			public const int menu_rate = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int menu_rules = 2130837515;
+			public const int menu_reload = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int menu_search = 2130837516;
+			public const int menu_rules = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int menu_settings = 2130837517;
+			public const int menu_search = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int up_arrow = 2130837518;
+			public const int menu_settings = 2130837518;
+			
+			// aapt resource value: 0x7f02000f
+			public const int up_arrow = 2130837519;
+			
+			// aapt resource value: 0x7f020010
+			public const int wallpaper_opponent = 2130837520;
+			
+			// aapt resource value: 0x7f020011
+			public const int wallpaper_player = 2130837521;
 			
 			static Drawable()
 			{
@@ -122,41 +131,35 @@ namespace UI.MtgLifeCounter.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f080008
-			public const int btnImgExpander = 2131230728;
-			
 			// aapt resource value: 0x7f080006
-			public const int frame_container = 2131230726;
-			
-			// aapt resource value: 0x7f08000a
-			public const int ivMenuImg = 2131230730;
-			
-			// aapt resource value: 0x7f080002
-			public const int menuIconImgView = 2131230722;
-			
-			// aapt resource value: 0x7f080009
-			public const int menuListView = 2131230729;
-			
-			// aapt resource value: 0x7f080000
-			public const int myButton = 2131230720;
-			
-			// aapt resource value: 0x7f080001
-			public const int titleBarLinearLayout = 2131230721;
-			
-			// aapt resource value: 0x7f080003
-			public const int txtActionBarText = 2131230723;
+			public const int btnImgExpander = 2131230726;
 			
 			// aapt resource value: 0x7f080004
-			public const int txtActionBarText2 = 2131230724;
+			public const int frame_container = 2131230724;
 			
-			// aapt resource value: 0x7f080005
-			public const int txtActionBarText3 = 2131230725;
+			// aapt resource value: 0x7f080003
+			public const int frame_main = 2131230723;
+			
+			// aapt resource value: 0x7f080008
+			public const int ivMenuImg = 2131230728;
+			
+			// aapt resource value: 0x7f080001
+			public const int menuIconImgView = 2131230721;
 			
 			// aapt resource value: 0x7f080007
-			public const int txtDescription = 2131230727;
+			public const int menuListView = 2131230727;
 			
-			// aapt resource value: 0x7f08000b
-			public const int txtMnuText = 2131230731;
+			// aapt resource value: 0x7f080000
+			public const int titleBarLinearLayout = 2131230720;
+			
+			// aapt resource value: 0x7f080002
+			public const int txtActionBarText = 2131230722;
+			
+			// aapt resource value: 0x7f080005
+			public const int txtDescription = 2131230725;
+			
+			// aapt resource value: 0x7f080009
+			public const int txtMnuText = 2131230729;
 			
 			static Id()
 			{
@@ -278,23 +281,23 @@ namespace UI.MtgLifeCounter.Android
 			// aapt resource value: 0x7f050002
 			public const int hello = 2131034114;
 			
-			// aapt resource value: 0x7f05000d
-			public const int menu_about = 2131034125;
-			
 			// aapt resource value: 0x7f05000e
-			public const int menu_close = 2131034126;
+			public const int menu_about = 2131034126;
 			
 			// aapt resource value: 0x7f05000f
-			public const int menu_debug = 2131034127;
+			public const int menu_close = 2131034127;
 			
 			// aapt resource value: 0x7f050010
-			public const int menu_dice = 2131034128;
+			public const int menu_debug = 2131034128;
 			
 			// aapt resource value: 0x7f050011
-			public const int menu_help = 2131034129;
+			public const int menu_dice = 2131034129;
 			
 			// aapt resource value: 0x7f050012
-			public const int menu_history = 2131034130;
+			public const int menu_help = 2131034130;
+			
+			// aapt resource value: 0x7f05000d
+			public const int menu_main = 2131034125;
 			
 			// aapt resource value: 0x7f050013
 			public const int menu_rate = 2131034131;

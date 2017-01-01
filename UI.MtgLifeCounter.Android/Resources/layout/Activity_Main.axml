@@ -10,7 +10,7 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="55dp"
-        android:background="#ff000000">
+        android:background="#00000000">
         <ImageView
             android:id="@+id/menuIconImgView"
             android:src="@drawable/menu_icon"
@@ -27,29 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#FFFFFF"
-            android:text="Home"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:layout_centerVertical="true"
-            android:textSize="18dp"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:id="@+id/txtActionBarText2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:text="Home"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:layout_centerVertical="true"
-            android:textSize="18dp"
-            android:layout_centerHorizontal="true" />
-        <TextView
-            android:id="@+id/txtActionBarText3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
-            android:text="Home"
+            android:text="..."
             android:layout_gravity="center"
             android:clickable="true"
             android:layout_centerVertical="true"
@@ -57,9 +35,15 @@
             android:layout_centerHorizontal="true" />
     </RelativeLayout>
     <FrameLayout
+        android:id="@+id/frame_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+    <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:visibility="gone" />
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="match_parent"
@@ -70,7 +54,7 @@
         android:clickable="true"
         android:textSize="18dp"
         android:layout_above="@+id/btnImgExpander"
-        android:background="#FFFFFF"
+        android:background="#AAFFFFFF"
         android:gravity="center"
         android:visibility="gone" />
     <ImageView
@@ -79,11 +63,11 @@
         android:layout_height="30dp"
         android:layout_width="match_parent"
         android:src="@drawable/up_arrow"
-        android:background="#ff00ff00" />
+        android:background="#2200ff00" />
     <ListView
         android:id="@+id/menuListView"
         android:layout_below="@+id/titleBarLinearLayout"
-        android:background="#ffff0000"
+        android:background="#00000000"
         android:divider="#CFEBFF"
         android:dividerHeight="1dp"
         android:layout_marginLeft="0dp"

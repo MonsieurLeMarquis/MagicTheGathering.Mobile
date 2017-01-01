@@ -12,7 +12,15 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 		public static List<MenuItem> ListMenuItems(Activity activity)
 		{
 			return new List<MenuItem> () {
-				new MenuItem () { 
+                new MenuItem () {
+                    Label = activity.GetString (Resource.String.menu_main),
+                    Icon = Resource.Drawable.menu_history,
+                    Action = new MenuItemAction {
+                        TypeAction = MenuItemAction.TYPE_ACTION.LOAD_FRAGMENT,
+                        Screen = typeof(HistoryFragment)
+                    }
+                },
+                new MenuItem () { 
 					Label = activity.GetString (Resource.String.menu_dice), 
 					Icon = Resource.Drawable.menu_dice,
 					Action = new MenuItemAction {
@@ -26,14 +34,6 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 					Action = new MenuItemAction {
 						TypeAction = MenuItemAction.TYPE_ACTION.LOAD_FRAGMENT,
 						Screen = typeof(HelpFragment)
-					}
-				},
-				new MenuItem () { 
-					Label = activity.GetString (Resource.String.menu_history), 
-					Icon = Resource.Drawable.menu_history,
-					Action = new MenuItemAction {
-						TypeAction = MenuItemAction.TYPE_ACTION.LOAD_FRAGMENT,
-						Screen = typeof(HistoryFragment)
 					}
 				},
 				new MenuItem () { 

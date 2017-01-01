@@ -1,19 +1,27 @@
 using Android.App;
+using Android.Graphics;
 
 namespace Common.Android.Resolution
 {
 
-    public class ManagerScreen
+    public class ManagerResolution
     {
+
+        private static Point GetRealScreenSize(Activity activity)
+        {
+            var size = new Point();
+            activity.WindowManager.DefaultDisplay.GetRealSize(size);
+            return size;
+        }
 
         public static int PixelsHeight(Activity activity)
         {
-            return activity.Resources.DisplayMetrics.HeightPixels;
+            return GetRealScreenSize(activity).Y;
         }
 
         public static int PixelsWidth(Activity activity)
         {
-            return activity.Resources.DisplayMetrics.HeightPixels;
+            return GetRealScreenSize(activity).X;
         }
 
         public static int DpHeight(Activity activity)

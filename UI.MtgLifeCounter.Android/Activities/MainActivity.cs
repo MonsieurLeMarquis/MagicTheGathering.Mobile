@@ -2,30 +2,26 @@
 using Android.Widget;
 using Android.OS;
 using Android.Views;
-using UI.MtgLifeCounter.Android;
 using UI.MtgLifeCounter.Android.Components.Menu;
-using System;
-using Android.Graphics;
-using Android.Views.Animations;
-using System.Collections.Generic;
-using UI.MtgLifeCounter.Android.Fragments;
 using Common.Android.Activities;
 using Android.Content.PM;
 using Business.MtgLifeCounter.Objects;
 using Business.MtgLifeCounter.Managers;
 using UI.MtgLifeCounter.Android.Drawings;
+using Common.Android.Resolution;
 
 namespace UI.MtgLifeCounter.Android.Activities
 {
 	
-	[Activity (Label = "MtgLifeCounter", MainLauncher = false, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait)]
-	public class MainActivity : BaseActivityMenu, GestureDetector.IOnGestureListener
+	[Activity (Label = "MtgLifeCounter", MainLauncher = false, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait, Theme = "@android:style/Theme.Black.NoTitleBar.Fullscreen")]
+	public class MainActivity : BaseActivityMenu//, GestureDetector.IOnGestureListener
     {
 
+        /*
         private GestureDetector _gestureDetector;
+        */
 
         private FrameLayout _frameLayout;
-
         private Screen _screen;
 
 
@@ -35,22 +31,27 @@ namespace UI.MtgLifeCounter.Android.Activities
             ManagerActivity.SetFullScreen(this);
             SetContentView (Resource.Layout.Activity_Main);
 			InitializeMenu (ResourcesMenu.ListMenuItems(this));
+
+            /*
             _gestureDetector = new GestureDetector(this);
+            */
 
+            _frameLayout = FindViewById<FrameLayout>(Resource.Id.frame_main);
 
-            _frameLayout = FindViewById<FrameLayout>(Resource.Id.frame_container);
-
-            var textView = Common.Android.Drawing.ManagerDrawing.DrawTextView(this);
-            textView = Common.Android.Drawing.ManagerDrawing.SetText(textView, "TEST", 20, new Color(255, 255, 255));
-            Common.Android.Drawing.ManagerDrawing.ShowTextView(textView, 200, 200, 200, 200, _frameLayout);
-
+            var imageOpponent = Common.Android.Drawing.ManagerDrawing.DrawImageView(Resource.Drawable.wallpaper_opponent, this);
+            var imagePlayer = Common.Android.Drawing.ManagerDrawing.DrawImageView(Resource.Drawable.wallpaper_player, this);
+            Common.Android.Drawing.ManagerDrawing.ShowImageView(imageOpponent, ManagerResolution.PixelsWidth(this), ManagerResolution.PixelsHeight(this) / 2, 0, 0, _frameLayout);
+            Common.Android.Drawing.ManagerDrawing.ShowImageView(imagePlayer, ManagerResolution.PixelsWidth(this), ManagerResolution.PixelsHeight(this) / 2, 0, ManagerResolution.PixelsHeight(this) / 2, _frameLayout);
+            
             _screen = ManagerWidgets.CreateWidgets(this);
-            ManagerDrawing.DrawScreen(_screen);
+            ManagerDrawing.DrawScreen(_screen, _frameLayout, this);
 
         }
 
         #region GESTURE LISTENER
 
+        /*
+        
         public bool OnDown(MotionEvent e)
         {
             Toast.MakeText(this, "TEST", ToastLength.Long).Show();
@@ -79,6 +80,8 @@ namespace UI.MtgLifeCounter.Android.Activities
         {
             return false;
         }
+
+        */
 
         #endregion
 
