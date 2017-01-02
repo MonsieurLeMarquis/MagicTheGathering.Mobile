@@ -52,10 +52,11 @@
     <Compile Include="Drawings\ManagerDrawing.cs" />
     <Compile Include="Drawings\Themes.cs" />
     <Compile Include="Gesture\ManagerGesture.cs" />
+    <Compile Include="Gesture\Move.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Menu\BaseActivityMenu.cs" />
-    <Compile Include="Components\Menu\GestureListener.cs" />
+    <Compile Include="Gesture\GestureListener.cs" />
     <Compile Include="Components\Menu\MenuItem.cs" />
     <Compile Include="Components\Menu\MenuItemAction.cs" />
     <Compile Include="Components\Menu\MenuListAdapter.cs" />

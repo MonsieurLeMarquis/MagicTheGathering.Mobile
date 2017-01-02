@@ -1,6 +1,6 @@
 using Android.App;
 using Business.MtgLifeCounter.Constants;
-using Business.MtgLifeCounter.Objects;
+using Business.MtgLifeCounter.Widgets;
 using Common.Android.Drawing;
 using Common.Android.Resolution;
 

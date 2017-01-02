@@ -1,4 +1,4 @@
-namespace Business.MtgLifeCounter.Objects
+namespace Business.MtgLifeCounter.Widgets
 {
     public class BaseWidget
     {

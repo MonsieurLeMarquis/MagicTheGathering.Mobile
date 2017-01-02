@@ -1,4 +1,4 @@
-using Business.MtgLifeCounter.Objects;
+using Business.MtgLifeCounter.Widgets;
 
 namespace Business.MtgLifeCounter.Managers
 {

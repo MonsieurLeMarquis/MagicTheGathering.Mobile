@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Android.Fragments;
 using UI.MtgLifeCounter.Android.Activities;
+using UI.MtgLifeCounter.Android.Gesture;
 
 namespace UI.MtgLifeCounter.Android.Components.Menu
 {

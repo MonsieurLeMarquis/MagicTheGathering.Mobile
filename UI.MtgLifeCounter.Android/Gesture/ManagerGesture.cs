@@ -1,6 +1,5 @@
 using Android.App;
 using Android.Views;
-using UI.MtgLifeCounter.Android.Components.Menu;
 
 namespace UI.MtgLifeCounter.Android.Gesture
 {
@@ -10,40 +9,15 @@ namespace UI.MtgLifeCounter.Android.Gesture
         public GestureDetector GestureDetector { get; set; }
         public GestureListener GestureListener { get; set; }
 
-        public ManagerGesture(Activity activity)
+        public ManagerGesture(Activity activity, System.Action gestureLeft, System.Action gestureRight, System.Action gestureUp, System.Action gestureDown, System.Action singleTap)
         {
             GestureListener = new GestureListener();
-            GestureListener.LeftEvent += GestureLeft; 
-            GestureListener.RightEvent += GestureRight;
-            GestureListener.DownEvent += GestureDown;
-            GestureListener.UpEvent += GestureUp;
-            GestureListener.SingleTapEvent += SingleTap;
+            GestureListener.LeftEvent += gestureLeft; 
+            GestureListener.RightEvent += gestureRight;
+            GestureListener.DownEvent += gestureDown;
+            GestureListener.UpEvent += gestureUp;
+            GestureListener.SingleTapEvent += singleTap;
             GestureDetector = new GestureDetector(activity, GestureListener);
-        }
-
-        protected void GestureLeft()
-        {
-            var test = "";
-        }
-
-        protected void GestureRight()
-        {
-            var test = "";
-        }
-
-        protected void GestureUp()
-        {
-            var test = "";
-        }
-
-        protected void GestureDown()
-        {
-            var test = "";
-        }
-
-        protected void SingleTap()
-        {
-            var test = "";
         }
 
     }
