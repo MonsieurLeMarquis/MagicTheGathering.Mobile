@@ -1,7 +1,7 @@
 ﻿using System;
 using Android.Views;
 
-namespace UI.MtgLifeCounter.Android.Gesture
+namespace Common.Android.Gesture
 {
 
 	public class GestureListener: Java.Lang.Object, GestureDetector.IOnGestureListener
@@ -12,12 +12,14 @@ namespace UI.MtgLifeCounter.Android.Gesture
         public event Action UpEvent;
         public event Action DownEvent;
         public event Action SingleTapEvent;
+        public Move LastMove { get; set; }
 		//static int SWIPE_MAX_OFF_PATH = 250;
 		//static int SWIPE_MIN_DISTANCE = 100;
 		//static int SWIPE_THRESHOLD_VELOCITY = 200;
 
 		public GestureListener()
 		{
+            LastMove = new Move();
 		}
 
 		public bool OnFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY)
@@ -25,21 +27,21 @@ namespace UI.MtgLifeCounter.Android.Gesture
 			try
 			{
 
-                var move = new Move(e1, e2, velocityX, velocityY);
+                LastMove = new Move(e1, e2, velocityX, velocityY);
 
-                if (move.MoveRight)
+                if (LastMove.MoveRight)
                 {
                     RightEvent();
                 }
-                else if (move.MoveLeft)
+                else if (LastMove.MoveLeft)
                 {
                     LeftEvent();
                 }
-                else if (move.MoveUp)
+                else if (LastMove.MoveUp)
                 {
                     UpEvent();
                 }
-                else if (move.MoveDown)
+                else if (LastMove.MoveDown)
                 {
                     DownEvent();
                 }
@@ -84,8 +86,9 @@ namespace UI.MtgLifeCounter.Android.Gesture
 		}
 
 		public bool OnSingleTapUp(MotionEvent e)
-		{
-			SingleTapEvent ();
+        {
+            LastMove = new Move(e);
+            SingleTapEvent ();
 			Console.WriteLine ( "Single tap up" );
 			return true;
 		}

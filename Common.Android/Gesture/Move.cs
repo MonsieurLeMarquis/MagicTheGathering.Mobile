@@ -1,7 +1,7 @@
 using Android.Views;
 using Java.Lang;
 
-namespace UI.MtgLifeCounter.Android.Gesture
+namespace Common.Android.Gesture
 {
     public class Move
     {
@@ -15,6 +15,22 @@ namespace UI.MtgLifeCounter.Android.Gesture
         private const int MOVE_RATIO_X_Y_MIN = 4;
         private const int SWIPE_THRESHOLD_VELOCITY = 100;
 
+        public Move()
+        {
+            start = null;
+            end = null;
+            velocityX = 0;
+            velocityY = 0;
+        }
+
+        public Move(MotionEvent move)
+        {
+            start = move;
+            end = move;
+            velocityX = 0;
+            velocityY = 0;
+        }
+
         public Move(MotionEvent meStart, MotionEvent meEnd, float fVelocityX, float fVelocityY)
         {
             start = meStart;
@@ -23,11 +39,37 @@ namespace UI.MtgLifeCounter.Android.Gesture
             velocityY = fVelocityY;
         }
 
+        private float X(MotionEvent motion)
+        {
+            return motion != null ? motion.GetX() : 0;
+        }
+
+        private float Y(MotionEvent motion)
+        {
+            return motion != null ? motion.GetY() : 0;
+        }
+
+        public float CenterX
+        {
+            get
+            {
+                return (X(start) + X(end)) / 2;
+            }
+        }
+
+        public float CenterY
+        {
+            get
+            {
+                return (Y(start) + Y(end)) / 2;
+            }
+        }
+
         public float DiffX
         {
             get
             {
-                return start != null && end != null ? end.GetX() - start.GetX() : 0f;
+                return start != null && end != null ? X(end) - X(start) : 0f;
             }
         }
 
@@ -35,9 +77,18 @@ namespace UI.MtgLifeCounter.Android.Gesture
         {
             get
             {
-                return start != null && end != null ? end.GetY() - start.GetY() : 0f;
+                return start != null && end != null ? Y(end) - Y(start) : 0f;
             }
         }
+
+        public bool IsPoint
+        {
+            get
+            {
+                return DiffX == 0 && DiffY == 0 && velocityX == 0 && velocityY == 0;
+            }
+        }
+
 
         public bool IsLine
         {

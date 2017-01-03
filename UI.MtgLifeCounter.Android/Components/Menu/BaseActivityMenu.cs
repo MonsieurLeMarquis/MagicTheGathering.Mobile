@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Common.Android.Fragments;
 using UI.MtgLifeCounter.Android.Activities;
-using UI.MtgLifeCounter.Android.Gesture;
+using Common.Android.Gesture;
+using Business.MtgLifeCounter.Widgets;
+using Business.MtgLifeCounter.Managers;
 
 namespace UI.MtgLifeCounter.Android.Components.Menu
 {
@@ -18,17 +20,19 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 	public class BaseActivityMenu : BaseActivity
 	{
 
-		GestureDetector gestureDetector;
-		GestureListener gestureListener;
-		ListView menuListView; 
-		MenuListAdapter objAdapterMenu;
-		ImageView menuIconImageView;
-		int intDisplayWidth;
-		bool isSingleTapFired = false;
-		TextView txtActionBarText;
-		TextView txtDescription;
-		ImageView btnDescExpander;
-		List<MenuItem> MenuItems = new List<MenuItem>();
+        private GestureDetector gestureDetector;
+		public GestureListener gestureListener;
+        private ListView menuListView;
+        private MenuListAdapter objAdapterMenu;
+        private ImageView menuIconImageView;
+        private int intDisplayWidth;
+        private bool isSingleTapFired = false;
+        private TextView txtActionBarText;
+        private TextView txtDescription;
+        private ImageView btnDescExpander;
+		private List<MenuItem> MenuItems = new List<MenuItem>();
+
+        public Screen ScreenReference { get; set; }
 
 		protected void InitializeMenu(List<MenuItem> menuItems)
 		{
@@ -134,15 +138,17 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 
 		protected void GestureLeft()
 		{
-			if(!menuListView.IsShown)
+            if (ScreenReference != null && ManagerScreenScore.GetTypeScore(ScreenReference, gestureListener.LastMove) == ManagerScreenScore.TypeScore.NONE
+                && menuListView.IsShown)
 				FnToggleMenu (); 
 			isSingleTapFired = false; 
 		}
 
 		protected void GestureRight()
-		{
-			if(menuListView.IsShown)
-				FnToggleMenu (); 
+        {
+            if (ScreenReference != null && ManagerScreenScore.GetTypeScore(ScreenReference, gestureListener.LastMove) == ManagerScreenScore.TypeScore.NONE
+                && !menuListView.IsShown)
+                FnToggleMenu (); 
 			isSingleTapFired = false; 
 		}
 

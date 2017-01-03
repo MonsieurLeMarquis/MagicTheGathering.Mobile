@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Game\Score.cs" />
+    <Compile Include="Managers\ManagerScore.cs" />
     <Compile Include="Managers\ManagerScreen.cs" />
+    <Compile Include="Managers\ManagerScreenScore.cs" />
     <Compile Include="Managers\ManagerSize.cs" />
     <Compile Include="Managers\ManagerWidgets.cs" />
     <Compile Include="Widgets\BaseWidget.cs" />

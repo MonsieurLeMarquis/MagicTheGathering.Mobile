@@ -1,7 +1,7 @@
 using Android.App;
 using Android.Views;
 
-namespace UI.MtgLifeCounter.Android.Gesture
+namespace Common.Android.Gesture
 {
     public class ManagerGesture
     {

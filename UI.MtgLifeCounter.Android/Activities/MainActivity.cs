@@ -9,7 +9,7 @@ using Business.MtgLifeCounter.Widgets;
 using Business.MtgLifeCounter.Managers;
 using UI.MtgLifeCounter.Android.Drawings;
 using Common.Android.Resolution;
-using UI.MtgLifeCounter.Android.Gesture;
+using Common.Android.Gesture;
 using Game = Business.MtgLifeCounter.Game;
 
 namespace UI.MtgLifeCounter.Android.Activities
@@ -24,7 +24,6 @@ namespace UI.MtgLifeCounter.Android.Activities
         private Screen _screen;
         private ImageView _imageOpponent;
         private ImageView _imagePlayer;
-
         private Game.Score _score;
 
         protected override void OnCreate (Bundle savedInstanceState)
@@ -39,6 +38,8 @@ namespace UI.MtgLifeCounter.Android.Activities
             InitializeGesture();
             InitializeScreen();
             DrawScreen();
+
+            ScreenReference = _screen;
         }
 
         #region INITIALIZATION
@@ -84,31 +85,155 @@ namespace UI.MtgLifeCounter.Android.Activities
 
         protected void GameGestureLeft()
         {
-            _score.Player *= 2;
+            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
+            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            {
+                return;
+            }
+            switch (typeScore)
+            {
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
+                    _score.Opponent *= 2;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
+                    _score.Player *= 2;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
+                    _score.Player /= 2;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
+                    _score.Opponent /= 2;
+                    break;
+            }
             ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         protected void GameGestureRight()
         {
-            _score.Opponent *= 2;
+            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
+            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            {
+                return;
+            }
+            switch (typeScore)
+            {
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
+                    _score.Opponent /= 2;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
+                    _score.Player /= 2;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
+                    _score.Player *= 2;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
+                    _score.Opponent *= 2;
+                    break;
+            }
             ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         protected void GameGestureUp()
         {
-            _score.Player /= 2;
+            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
+            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            {
+                return;
+            }
+            switch (typeScore)
+            {
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
+                    _score.Opponent -= 5;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
+                    _score.Player -= 5;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
+                    _score.Player += 5;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
+                    _score.Opponent += 5;
+                    break;
+            }
             ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         protected void GameGestureDown()
         {
-            _score.Opponent /= 2;
+            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
+            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            {
+                return;
+            }
+            switch (typeScore)
+            {
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
+                    _score.Opponent += 5;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
+                    _score.Player += 5;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
+                    _score.Player -= 5;
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
+                    _score.Opponent -= 5;
+                    break;
+            }
             ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         protected void GameSingleTap()
         {
-            var test = "";
+            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
+            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            {
+                return;
+            }
+            switch (typeScore)
+            {
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
+                    if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
+                    {
+                        _score.Opponent -= 1;
+                    }
+                    else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
+                    {
+                        _score.Opponent += 1;
+                    }
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
+                    if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
+                    {
+                        _score.Player -= 1;
+                    }
+                    else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
+                    {
+                        _score.Player += 1;
+                    }
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
+                    if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
+                    {
+                        _score.Player += 1;
+                    }
+                    else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
+                    {
+                        _score.Player -= 1;
+                    }
+                    break;
+                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
+                    if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
+                    {
+                        _score.Opponent += 1;
+                    }
+                    else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
+                    {
+                        _score.Opponent -= 1;
+                    }
+                    break;
+            }
+            ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         #endregion

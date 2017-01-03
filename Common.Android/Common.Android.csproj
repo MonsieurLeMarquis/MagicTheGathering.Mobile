@@ -50,6 +50,9 @@
     <Compile Include="Drawing\ManagerDrawing.cs" />
     <Compile Include="Drawing\ThemeDrawable.cs" />
     <Compile Include="Fragments\ManagerFragment.cs" />
+    <Compile Include="Gesture\GestureListener.cs" />
+    <Compile Include="Gesture\ManagerGesture.cs" />
+    <Compile Include="Gesture\Move.cs" />
     <Compile Include="Resolution\ManagerResolution.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
