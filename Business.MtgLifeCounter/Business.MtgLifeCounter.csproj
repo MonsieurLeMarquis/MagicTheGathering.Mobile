@@ -45,6 +45,10 @@
   <ItemGroup>
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Game\Score.cs" />
+    <Compile Include="History\HistoryAllGames.cs" />
+    <Compile Include="History\HistoryGame.cs" />
+    <Compile Include="History\HistoryScore.cs" />
+    <Compile Include="Managers\ManagerHistory.cs" />
     <Compile Include="Managers\ManagerScore.cs" />
     <Compile Include="Managers\ManagerScreen.cs" />
     <Compile Include="Managers\ManagerScreenScore.cs" />

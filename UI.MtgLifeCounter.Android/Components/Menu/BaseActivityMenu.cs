@@ -12,6 +12,7 @@ using UI.MtgLifeCounter.Android.Activities;
 using Common.Android.Gesture;
 using Business.MtgLifeCounter.Widgets;
 using Business.MtgLifeCounter.Managers;
+using Business.MtgLifeCounter.History;
 
 namespace UI.MtgLifeCounter.Android.Components.Menu
 {
@@ -33,6 +34,7 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 		private List<MenuItem> MenuItems = new List<MenuItem>();
 
         public Screen ScreenReference { get; set; }
+        public HistoryAllGames HistoryReference { get; set; } 
 
 		protected void InitializeMenu(List<MenuItem> menuItems)
 		{
@@ -118,11 +120,15 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
                             {
                                 frameMain.Visibility = ViewStates.Visible;
                                 frameContainer.Visibility = ViewStates.Gone;
+                                btnDescExpander.Visibility = ViewStates.Visible;
+                                txtDescription.Visibility = ViewStates.Visible;
                             }
                             else
                             {
                                 frameMain.Visibility = ViewStates.Gone;
                                 frameContainer.Visibility = ViewStates.Visible;
+                                btnDescExpander.Visibility = ViewStates.Gone;
+                                txtDescription.Visibility = ViewStates.Gone;
                             }
                             // Lancement du fragment
 							ManagerFragment.Launch (base.FragmentManager, (Fragment)action.GetScreenInstance (), Resource.Id.frame_container);	
@@ -198,7 +204,8 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 				txtDescription.Animation = new  TranslateAnimation (0f, 0f, 0f, txtDescription.MeasuredHeight);
 				txtDescription.Animation.Duration = 300;
 				btnDescExpander.SetImageResource (Resource.Drawable.up_arrow); 
-			} else {    
+			} else {
+                txtDescription.Text = ManagerHistory.GetString(HistoryReference);
 				txtDescription.Visibility = ViewStates.Visible;
 				txtDescription.RequestFocus (); 
 				txtDescription.Animation = new  TranslateAnimation (0f, 0f, txtDescription.MeasuredHeight, 0f);

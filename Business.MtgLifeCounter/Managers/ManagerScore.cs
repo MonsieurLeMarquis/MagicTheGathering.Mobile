@@ -1,4 +1,5 @@
 using Business.MtgLifeCounter.Game;
+using Business.MtgLifeCounter.History;
 
 namespace Business.MtgLifeCounter.Managers
 {
@@ -7,33 +8,35 @@ namespace Business.MtgLifeCounter.Managers
 
         public enum TypePlayer { PLAYER, OPPONENT }
 
-        public void ScoreUp(Score score, TypePlayer typePlayer)
+        public static void ScoreUp(Score score, TypePlayer typePlayer, HistoryAllGames history, int value = 1)
         {
             switch (typePlayer)
             {
                 case TypePlayer.PLAYER:
-                    score.Player += 1;
+                    score.Player += value;
                     break;
                 case TypePlayer.OPPONENT:
-                    score.Player += 1;
+                    score.Opponent += value;
                     break;
             }
+            ManagerHistory.AddScore(history, score);
         }
 
-        public void ScoreDown(Score score, TypePlayer typePlayer)
+        public static void ScoreDown(Score score, TypePlayer typePlayer, HistoryAllGames history, int value = 1)
         {
             switch (typePlayer)
             {
                 case TypePlayer.PLAYER:
-                    score.Player -= 1;
+                    score.Player -= value;
                     break;
                 case TypePlayer.OPPONENT:
-                    score.Player -= 1;
+                    score.Opponent -= value;
                     break;
             }
+            ManagerHistory.AddScore(history, score);
         }
 
-        public void ScoreDouble(Score score, TypePlayer typePlayer)
+        public static void ScoreDouble(Score score, TypePlayer typePlayer, HistoryAllGames history)
         {
             switch (typePlayer)
             {
@@ -41,12 +44,13 @@ namespace Business.MtgLifeCounter.Managers
                     score.Player *= 2;
                     break;
                 case TypePlayer.OPPONENT:
-                    score.Player *= 2;
+                    score.Opponent *= 2;
                     break;
             }
+            ManagerHistory.AddScore(history, score);
         }
 
-        public void ScoreHalf(Score score, TypePlayer typePlayer)
+        public static void ScoreHalf(Score score, TypePlayer typePlayer, HistoryAllGames history)
         {
             switch (typePlayer)
             {
@@ -54,9 +58,10 @@ namespace Business.MtgLifeCounter.Managers
                     score.Player /= 2;
                     break;
                 case TypePlayer.OPPONENT:
-                    score.Player /= 2;
+                    score.Opponent /= 2;
                     break;
             }
+            ManagerHistory.AddScore(history, score);
         }
 
     }

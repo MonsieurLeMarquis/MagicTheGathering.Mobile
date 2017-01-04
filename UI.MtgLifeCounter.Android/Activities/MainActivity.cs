@@ -11,6 +11,7 @@ using UI.MtgLifeCounter.Android.Drawings;
 using Common.Android.Resolution;
 using Common.Android.Gesture;
 using Game = Business.MtgLifeCounter.Game;
+using Business.MtgLifeCounter.History;
 
 namespace UI.MtgLifeCounter.Android.Activities
 {
@@ -25,6 +26,7 @@ namespace UI.MtgLifeCounter.Android.Activities
         private ImageView _imageOpponent;
         private ImageView _imagePlayer;
         private Game.Score _score;
+        private HistoryAllGames _history;
 
         protected override void OnCreate (Bundle savedInstanceState)
 		{
@@ -33,6 +35,7 @@ namespace UI.MtgLifeCounter.Android.Activities
             SetContentView (Resource.Layout.Activity_Main);
 
             _score = new Game.Score() { Player = 20, Opponent = 20 };
+            _history = new HistoryAllGames();
 
             InitializeMenu();
             InitializeGesture();
@@ -40,6 +43,7 @@ namespace UI.MtgLifeCounter.Android.Activities
             DrawScreen();
 
             ScreenReference = _screen;
+            HistoryReference = _history;
         }
 
         #region INITIALIZATION
@@ -93,16 +97,16 @@ namespace UI.MtgLifeCounter.Android.Activities
             switch (typeScore)
             {
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
-                    _score.Opponent *= 2;
+                    ManagerScore.ScoreDouble(_score, ManagerScore.TypePlayer.OPPONENT, _history);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
-                    _score.Player *= 2;
+                    ManagerScore.ScoreDouble(_score, ManagerScore.TypePlayer.PLAYER, _history);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
-                    _score.Player /= 2;
+                    ManagerScore.ScoreHalf(_score, ManagerScore.TypePlayer.PLAYER, _history);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
-                    _score.Opponent /= 2;
+                    ManagerScore.ScoreHalf(_score, ManagerScore.TypePlayer.OPPONENT, _history);
                     break;
             }
             ManagerDrawing.RefreshScores(_screen, _score);
@@ -118,16 +122,16 @@ namespace UI.MtgLifeCounter.Android.Activities
             switch (typeScore)
             {
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
-                    _score.Opponent /= 2;
+                    ManagerScore.ScoreHalf(_score, ManagerScore.TypePlayer.OPPONENT, _history);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
-                    _score.Player /= 2;
+                    ManagerScore.ScoreHalf(_score, ManagerScore.TypePlayer.PLAYER, _history);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
-                    _score.Player *= 2;
+                    ManagerScore.ScoreDouble(_score, ManagerScore.TypePlayer.PLAYER, _history);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
-                    _score.Opponent *= 2;
+                    ManagerScore.ScoreDouble(_score, ManagerScore.TypePlayer.OPPONENT, _history);
                     break;
             }
             ManagerDrawing.RefreshScores(_screen, _score);
@@ -143,16 +147,16 @@ namespace UI.MtgLifeCounter.Android.Activities
             switch (typeScore)
             {
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
-                    _score.Opponent -= 5;
+                    ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.OPPONENT, _history, 5);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
-                    _score.Player -= 5;
+                    ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.PLAYER, _history, 5);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
-                    _score.Player += 5;
+                    ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.PLAYER, _history, 5);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
-                    _score.Opponent += 5;
+                    ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.OPPONENT, _history, 5);
                     break;
             }
             ManagerDrawing.RefreshScores(_screen, _score);
@@ -168,16 +172,16 @@ namespace UI.MtgLifeCounter.Android.Activities
             switch (typeScore)
             {
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
-                    _score.Opponent += 5;
+                    ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.OPPONENT, _history, 5);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
-                    _score.Player += 5;
+                    ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.PLAYER, _history, 5);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
-                    _score.Player -= 5;
+                    ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.PLAYER, _history, 5);
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
-                    _score.Opponent -= 5;
+                    ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.OPPONENT, _history, 5);
                     break;
             }
             ManagerDrawing.RefreshScores(_screen, _score);
@@ -195,41 +199,41 @@ namespace UI.MtgLifeCounter.Android.Activities
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
                     if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
                     {
-                        _score.Opponent -= 1;
+                        ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.OPPONENT, _history);
                     }
                     else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
                     {
-                        _score.Opponent += 1;
+                        ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.OPPONENT, _history);
                     }
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
                     if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
                     {
-                        _score.Player -= 1;
+                        ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.PLAYER, _history);
                     }
                     else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
                     {
-                        _score.Player += 1;
+                        ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.PLAYER, _history);
                     }
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
                     if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
                     {
-                        _score.Player += 1;
+                        ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.PLAYER, _history);
                     }
                     else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
                     {
-                        _score.Player -= 1;
+                        ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.PLAYER, _history);
                     }
                     break;
                 case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
                     if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
                     {
-                        _score.Opponent += 1;
+                        ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.OPPONENT, _history);
                     }
                     else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
                     {
-                        _score.Opponent -= 1;
+                        ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.OPPONENT, _history);
                     }
                     break;
             }
