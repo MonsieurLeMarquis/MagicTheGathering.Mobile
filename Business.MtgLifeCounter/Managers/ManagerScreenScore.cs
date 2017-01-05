@@ -1,18 +1,11 @@
 using Business.MtgLifeCounter.Widgets;
 using Common.Android.Gesture;
+using static Business.MtgLifeCounter.Enumerations.Enum;
 
 namespace Business.MtgLifeCounter.Managers
 {
     public class ManagerScreenScore
     {
-
-        public enum TypeScore {
-            ZONE_OPPONENT_SCORE_OPPONENT,
-            ZONE_OPPONENT_SCORE_PLAYER,
-            ZONE_PLAYER_SCORE_PLAYER,
-            ZONE_PLAYER_SCORE_OPPONENT,
-            NONE
-        }
 
         public static TypeScore GetTypeScore(Screen screen, Move move)
         {
@@ -33,6 +26,36 @@ namespace Business.MtgLifeCounter.Managers
                 return TypeScore.ZONE_PLAYER_SCORE_OPPONENT;
             }
             return TypeScore.NONE;
+        }
+
+        public static TypePlayer GetTypePlayer(Screen screen, Move move)
+        {
+            var typePlayer = TypePlayer.NONE;
+            var typeScore = GetTypeScore(screen, move);
+            if (typeScore == TypeScore.ZONE_OPPONENT_SCORE_PLAYER | typeScore == TypeScore.ZONE_PLAYER_SCORE_PLAYER)
+            {
+                typePlayer = TypePlayer.PLAYER;
+            }
+            if (typeScore == TypeScore.ZONE_OPPONENT_SCORE_OPPONENT | typeScore == TypeScore.ZONE_PLAYER_SCORE_OPPONENT)
+            {
+                typePlayer = TypePlayer.OPPONENT;
+            }
+            return typePlayer;
+        }
+
+        public static TypeZone GetTypeZone(Screen screen, Move move)
+        {
+            var typeZone = TypeZone.NONE;
+            var typeScore = GetTypeScore(screen, move);
+            if (typeScore == TypeScore.ZONE_PLAYER_SCORE_PLAYER | typeScore == TypeScore.ZONE_PLAYER_SCORE_OPPONENT)
+            {
+                typeZone = TypeZone.PLAYER;
+            }
+            if (typeScore == TypeScore.ZONE_OPPONENT_SCORE_OPPONENT | typeScore == TypeScore.ZONE_OPPONENT_SCORE_PLAYER)
+            {
+                typeZone = TypeZone.OPPONENT;
+            }
+            return typeZone;
         }
 
         public static bool GestureInScore(Score score, Position position, Move move)

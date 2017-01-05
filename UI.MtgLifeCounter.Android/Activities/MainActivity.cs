@@ -6,12 +6,13 @@ using UI.MtgLifeCounter.Android.Components.Menu;
 using Common.Android.Activities;
 using Android.Content.PM;
 using Business.MtgLifeCounter.Widgets;
-using Business.MtgLifeCounter.Managers;
+using GameManagers = Business.MtgLifeCounter.Managers;
 using UI.MtgLifeCounter.Android.Drawings;
 using Common.Android.Resolution;
-using Common.Android.Gesture;
+using AndroidGesture = Common.Android.Gesture;
 using Game = Business.MtgLifeCounter.Game;
 using Business.MtgLifeCounter.History;
+using AndroidDrawing = Common.Android.Drawing;
 
 namespace UI.MtgLifeCounter.Android.Activities
 {
@@ -21,7 +22,7 @@ namespace UI.MtgLifeCounter.Android.Activities
     {
       
         private FrameLayout _frameLayout;
-        private ManagerGesture _managerGesture;
+        private AndroidGesture.ManagerGesture _managerGesture;
         private Screen _screen;
         private ImageView _imageOpponent;
         private ImageView _imagePlayer;
@@ -34,7 +35,7 @@ namespace UI.MtgLifeCounter.Android.Activities
             ManagerActivity.SetFullScreen(this);
             SetContentView (Resource.Layout.Activity_Main);
 
-            _score = new Game.Score() { Player = 20, Opponent = 20 };
+            _score = new Game.Score() { LifePoints_Player = 20, LifePoints_Opponent = 20, PoisonCounters_Player = 0, PoisonCounters_Opponent = 0 };
             _history = new HistoryAllGames();
 
             InitializeMenu();
@@ -56,14 +57,14 @@ namespace UI.MtgLifeCounter.Android.Activities
         private void InitializeScreen()
         {
             _frameLayout = FindViewById<FrameLayout>(Resource.Id.frame_main);
-            _screen = ManagerWidgets.CreateWidgets(this);
-            _imageOpponent = Common.Android.Drawing.ManagerDrawing.DrawImageView(Resource.Drawable.wallpaper_opponent, this);
-            _imagePlayer = Common.Android.Drawing.ManagerDrawing.DrawImageView(Resource.Drawable.wallpaper_player, this);
+            _screen = GameManagers.ManagerWidgets.CreateWidgets(this);
+            _imageOpponent = AndroidDrawing.ManagerDrawing.DrawImageView(Resource.Drawable.wallpaper_opponent, this);
+            _imagePlayer = AndroidDrawing.ManagerDrawing.DrawImageView(Resource.Drawable.wallpaper_player, this);
         }
 
         private void InitializeGesture()
         {
-            _managerGesture = new ManagerGesture(this, GameGestureLeft, GameGestureRight, GameGestureUp, GameGestureDown, GameSingleTap);
+            _managerGesture = new AndroidGesture.ManagerGesture(this, GameGestureLeft, GameGestureRight, GameGestureUp, GameGestureDown, GameSingleTap);
         }
 
         #endregion
@@ -72,8 +73,8 @@ namespace UI.MtgLifeCounter.Android.Activities
 
         public void DrawScreen()
         {
-            Common.Android.Drawing.ManagerDrawing.ShowImageView(_imageOpponent, ManagerResolution.PixelsWidth(this), ManagerResolution.PixelsHeight(this) / 2, 0, 0, _frameLayout);
-            Common.Android.Drawing.ManagerDrawing.ShowImageView(_imagePlayer, ManagerResolution.PixelsWidth(this), ManagerResolution.PixelsHeight(this) / 2, 0, ManagerResolution.PixelsHeight(this) / 2, _frameLayout);
+            AndroidDrawing.ManagerDrawing.ShowImageView(_imageOpponent, ManagerResolution.PixelsWidth(this), ManagerResolution.PixelsHeight(this) / 2, 0, 0, _frameLayout);
+            AndroidDrawing.ManagerDrawing.ShowImageView(_imagePlayer, ManagerResolution.PixelsWidth(this), ManagerResolution.PixelsHeight(this) / 2, 0, ManagerResolution.PixelsHeight(this) / 2, _frameLayout);
             ManagerDrawing.DrawScreen(_screen, _score, _frameLayout, this);
         }
 
@@ -89,155 +90,42 @@ namespace UI.MtgLifeCounter.Android.Activities
 
         protected void GameGestureLeft()
         {
-            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
-            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            if (GameManagers.ManagerGesture.GameGestureLeft(_screen, gestureListener.LastMove, _score, _history))
             {
-                return;
+                ManagerDrawing.RefreshScores(_screen, _score);
             }
-            switch (typeScore)
-            {
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
-                    ManagerScore.ScoreDouble(_score, ManagerScore.TypePlayer.OPPONENT, _history);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
-                    ManagerScore.ScoreDouble(_score, ManagerScore.TypePlayer.PLAYER, _history);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
-                    ManagerScore.ScoreHalf(_score, ManagerScore.TypePlayer.PLAYER, _history);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
-                    ManagerScore.ScoreHalf(_score, ManagerScore.TypePlayer.OPPONENT, _history);
-                    break;
-            }
-            ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         protected void GameGestureRight()
         {
-            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
-            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            if (GameManagers.ManagerGesture.GameGestureRight(_screen, gestureListener.LastMove, _score, _history))
             {
-                return;
+                ManagerDrawing.RefreshScores(_screen, _score);
             }
-            switch (typeScore)
-            {
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
-                    ManagerScore.ScoreHalf(_score, ManagerScore.TypePlayer.OPPONENT, _history);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
-                    ManagerScore.ScoreHalf(_score, ManagerScore.TypePlayer.PLAYER, _history);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
-                    ManagerScore.ScoreDouble(_score, ManagerScore.TypePlayer.PLAYER, _history);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
-                    ManagerScore.ScoreDouble(_score, ManagerScore.TypePlayer.OPPONENT, _history);
-                    break;
-            }
-            ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         protected void GameGestureUp()
         {
-            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
-            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            if (GameManagers.ManagerGesture.GameGestureUp(_screen, gestureListener.LastMove, _score, _history))
             {
-                return;
+                ManagerDrawing.RefreshScores(_screen, _score);
             }
-            switch (typeScore)
-            {
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
-                    ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.OPPONENT, _history, 5);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
-                    ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.PLAYER, _history, 5);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
-                    ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.PLAYER, _history, 5);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
-                    ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.OPPONENT, _history, 5);
-                    break;
-            }
-            ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         protected void GameGestureDown()
         {
-            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
-            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            if (GameManagers.ManagerGesture.GameGestureDown(_screen, gestureListener.LastMove, _score, _history))
             {
-                return;
+                ManagerDrawing.RefreshScores(_screen, _score);
             }
-            switch (typeScore)
-            {
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
-                    ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.OPPONENT, _history, 5);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
-                    ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.PLAYER, _history, 5);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
-                    ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.PLAYER, _history, 5);
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
-                    ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.OPPONENT, _history, 5);
-                    break;
-            }
-            ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         protected void GameSingleTap()
         {
-            var typeScore = ManagerScreenScore.GetTypeScore(_screen, gestureListener.LastMove);
-            if (typeScore == ManagerScreenScore.TypeScore.NONE)
+            if (GameManagers.ManagerGesture.GameSingleTap(_screen, gestureListener.LastMove, _score, _history))
             {
-                return;
+                ManagerDrawing.RefreshScores(_screen, _score);
             }
-            switch (typeScore)
-            {
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_OPPONENT:
-                    if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
-                    {
-                        ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.OPPONENT, _history);
-                    }
-                    else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
-                    {
-                        ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.OPPONENT, _history);
-                    }
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_OPPONENT_SCORE_PLAYER:
-                    if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
-                    {
-                        ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.PLAYER, _history);
-                    }
-                    else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
-                    {
-                        ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.PLAYER, _history);
-                    }
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_PLAYER:
-                    if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
-                    {
-                        ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.PLAYER, _history);
-                    }
-                    else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
-                    {
-                        ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.PLAYER, _history);
-                    }
-                    break;
-                case ManagerScreenScore.TypeScore.ZONE_PLAYER_SCORE_OPPONENT:
-                    if (ManagerScreenScore.GestureInScoreTop(_screen, gestureListener.LastMove))
-                    {
-                        ManagerScore.ScoreUp(_score, ManagerScore.TypePlayer.OPPONENT, _history);
-                    }
-                    else if (ManagerScreenScore.GestureInScoreBottom(_screen, gestureListener.LastMove))
-                    {
-                        ManagerScore.ScoreDown(_score, ManagerScore.TypePlayer.OPPONENT, _history);
-                    }
-                    break;
-            }
-            ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         #endregion

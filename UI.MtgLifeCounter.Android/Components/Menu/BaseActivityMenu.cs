@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Widget;
-using Android.OS;
 using Android.Views;
 using System;
 using Android.Graphics;
@@ -13,6 +12,7 @@ using Common.Android.Gesture;
 using Business.MtgLifeCounter.Widgets;
 using Business.MtgLifeCounter.Managers;
 using Business.MtgLifeCounter.History;
+using GameEnum = Business.MtgLifeCounter.Enumerations;
 
 namespace UI.MtgLifeCounter.Android.Components.Menu
 {
@@ -144,7 +144,7 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 
 		protected void GestureLeft()
 		{
-            if (ScreenReference != null && ManagerScreenScore.GetTypeScore(ScreenReference, gestureListener.LastMove) == ManagerScreenScore.TypeScore.NONE
+            if (ScreenReference != null && ManagerScreenScore.GetTypeScore(ScreenReference, gestureListener.LastMove) == GameEnum.Enum.TypeScore.NONE
                 && menuListView.IsShown)
 				FnToggleMenu (); 
 			isSingleTapFired = false; 
@@ -152,7 +152,7 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 
 		protected void GestureRight()
         {
-            if (ScreenReference != null && ManagerScreenScore.GetTypeScore(ScreenReference, gestureListener.LastMove) == ManagerScreenScore.TypeScore.NONE
+            if (ScreenReference != null && ManagerScreenScore.GetTypeScore(ScreenReference, gestureListener.LastMove) == GameEnum.Enum.TypeScore.NONE
                 && !menuListView.IsShown)
                 FnToggleMenu (); 
 			isSingleTapFired = false; 

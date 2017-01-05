@@ -12,8 +12,8 @@ namespace Business.MtgLifeCounter.History
 
         public HistoryScore(Score score)
         {
-            Player = score != null ? score.Player : 0;
-            Opponent = score != null ? score.Opponent : 0;
+            Player = score != null ? score.LifePoints_Player : 0;
+            Opponent = score != null ? score.LifePoints_Opponent : 0;
             Date = DateTime.Now;
         }
 

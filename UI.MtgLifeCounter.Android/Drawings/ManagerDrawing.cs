@@ -18,10 +18,10 @@ namespace UI.MtgLifeCounter.Android.Drawings
             if (ManagerScreen.IsValid(screen) && frameLayout != null)
             {
 
-                DrawFontFitTextView(screen.ZoneOpponent.ScoreOpponent.Widget, score.Opponent.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
-                DrawFontFitTextView(screen.ZoneOpponent.ScorePlayer.Widget, score.Player.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
-                DrawFontFitTextView(screen.ZonePlayer.ScorePlayer.Widget, score.Player.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
-                DrawFontFitTextView(screen.ZonePlayer.ScoreOpponent.Widget, score.Opponent.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
+                DrawFontFitTextView(screen.ZoneOpponent.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
+                DrawFontFitTextView(screen.ZoneOpponent.ScorePlayer.Widget, score.LifePoints_Player.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
+                DrawFontFitTextView(screen.ZonePlayer.ScorePlayer.Widget, score.LifePoints_Player.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
+                DrawFontFitTextView(screen.ZonePlayer.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
                 DrawFontFitTextView(screen.ZoneOpponent.NameOpponent.Widget, "P B", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
                 DrawFontFitTextView(screen.ZoneOpponent.NamePlayer.Widget, "Player", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
                 DrawFontFitTextView(screen.ZonePlayer.NamePlayer.Widget, "Player name A", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
@@ -69,10 +69,10 @@ namespace UI.MtgLifeCounter.Android.Drawings
         {
             if (ManagerScreen.IsValid(screen))
             {
-                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScoreOpponent.Widget, score.Opponent.ToString(), Colors.FontColor_Score);
-                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScorePlayer.Widget, score.Player.ToString(), Colors.FontColor_Score);
-                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScorePlayer.Widget, score.Player.ToString(), Colors.FontColor_Score);
-                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScoreOpponent.Widget, score.Opponent.ToString(), Colors.FontColor_Score);
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), Colors.FontColor_Score);
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScorePlayer.Widget, score.LifePoints_Player.ToString(), Colors.FontColor_Score);
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScorePlayer.Widget, score.LifePoints_Player.ToString(), Colors.FontColor_Score);
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), Colors.FontColor_Score);
             }
         }
 

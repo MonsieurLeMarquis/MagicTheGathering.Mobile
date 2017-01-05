@@ -1,36 +1,63 @@
 using Business.MtgLifeCounter.Game;
 using Business.MtgLifeCounter.History;
+using static Business.MtgLifeCounter.Enumerations.Enum;
 
 namespace Business.MtgLifeCounter.Managers
 {
     public class ManagerScore
     {
 
-        public enum TypePlayer { PLAYER, OPPONENT }
-
-        public static void ScoreUp(Score score, TypePlayer typePlayer, HistoryAllGames history, int value = 1)
+        public static void ScoreUp(Score score, TypePlayer typePlayer, HistoryAllGames history, bool poison = false, int value = 1)
         {
             switch (typePlayer)
             {
                 case TypePlayer.PLAYER:
-                    score.Player += value;
+                    if (poison)
+                    {
+                        score.PoisonCounters_Player += value;
+                    }
+                    else
+                    {
+                        score.LifePoints_Player += value;
+                    }                    
                     break;
                 case TypePlayer.OPPONENT:
-                    score.Opponent += value;
+                    if (poison)
+                    {
+                        score.PoisonCounters_Opponent += value;
+                    }
+                    else
+                    {
+                        score.LifePoints_Opponent += value;
+                    }
                     break;
             }
             ManagerHistory.AddScore(history, score);
         }
 
-        public static void ScoreDown(Score score, TypePlayer typePlayer, HistoryAllGames history, int value = 1)
+        public static void ScoreDown(Score score, TypePlayer typePlayer, HistoryAllGames history, bool poison = false, int value = 1)
         {
             switch (typePlayer)
             {
                 case TypePlayer.PLAYER:
-                    score.Player -= value;
+                    if (poison)
+                    {
+                        score.PoisonCounters_Player -= value;
+                    }
+                    else
+                    {
+                        score.LifePoints_Player -= value;
+                    }
                     break;
                 case TypePlayer.OPPONENT:
-                    score.Opponent -= value;
+                    if (poison)
+                    {
+                        score.PoisonCounters_Opponent -= value;
+                    }
+                    else
+                    {
+                        score.LifePoints_Opponent -= value;
+                    }
                     break;
             }
             ManagerHistory.AddScore(history, score);
@@ -41,10 +68,10 @@ namespace Business.MtgLifeCounter.Managers
             switch (typePlayer)
             {
                 case TypePlayer.PLAYER:
-                    score.Player *= 2;
+                    score.LifePoints_Player *= 2;
                     break;
                 case TypePlayer.OPPONENT:
-                    score.Opponent *= 2;
+                    score.LifePoints_Opponent *= 2;
                     break;
             }
             ManagerHistory.AddScore(history, score);
@@ -55,10 +82,10 @@ namespace Business.MtgLifeCounter.Managers
             switch (typePlayer)
             {
                 case TypePlayer.PLAYER:
-                    score.Player /= 2;
+                    score.LifePoints_Player /= 2;
                     break;
                 case TypePlayer.OPPONENT:
-                    score.Opponent /= 2;
+                    score.LifePoints_Opponent /= 2;
                     break;
             }
             ManagerHistory.AddScore(history, score);
