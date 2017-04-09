@@ -13,6 +13,7 @@ using AndroidGesture = Common.Android.Gesture;
 using Game = Business.MtgLifeCounter.Game;
 using Business.MtgLifeCounter.History;
 using AndroidDrawing = Common.Android.Drawing;
+using static Business.MtgLifeCounter.Enumerations.Enum;
 
 namespace UI.MtgLifeCounter.Android.Activities
 {
@@ -90,41 +91,41 @@ namespace UI.MtgLifeCounter.Android.Activities
 
         protected void GameGestureLeft()
         {
-            if (GameManagers.ManagerGesture.GameGestureLeft(_screen, gestureListener.LastMove, _score, _history))
+            if (GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_LEFT))
             {
-                ManagerDrawing.RefreshScores(_screen, _score);
+                ManagerDrawing.RefreshScores(_screen, _score, this);
             }
         }
 
         protected void GameGestureRight()
         {
-            if (GameManagers.ManagerGesture.GameGestureRight(_screen, gestureListener.LastMove, _score, _history))
+            if (GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_RIGHT))
             {
-                ManagerDrawing.RefreshScores(_screen, _score);
+                ManagerDrawing.RefreshScores(_screen, _score, this);
             }
         }
 
         protected void GameGestureUp()
         {
-            if (GameManagers.ManagerGesture.GameGestureUp(_screen, gestureListener.LastMove, _score, _history))
+            if (GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_UP))
             {
-                ManagerDrawing.RefreshScores(_screen, _score);
+                ManagerDrawing.RefreshScores(_screen, _score, this);
             }
         }
 
         protected void GameGestureDown()
         {
-            if (GameManagers.ManagerGesture.GameGestureDown(_screen, gestureListener.LastMove, _score, _history))
+            if (GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_DOWN))
             {
-                ManagerDrawing.RefreshScores(_screen, _score);
+                ManagerDrawing.RefreshScores(_screen, _score, this);
             }
         }
 
         protected void GameSingleTap()
         {
-            if (GameManagers.ManagerGesture.GameSingleTap(_screen, gestureListener.LastMove, _score, _history))
+            if (GameManagers.ManagerGesture.GameGestureSingleTap(_screen, gestureListener.LastMove, _score, _history))
             {
-                ManagerDrawing.RefreshScores(_screen, _score);
+                ManagerDrawing.RefreshScores(_screen, _score, this);
             }
         }
 

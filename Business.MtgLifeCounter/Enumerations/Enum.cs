@@ -26,5 +26,38 @@ namespace Business.MtgLifeCounter.Enumerations
             NONE
         }
 
+        public enum TypeGesture
+        {
+            SWIPE_LEFT,
+            SWIPE_RIGHT,
+            SWIPE_UP,
+            SWIPE_DOWN,
+            TOP,
+            BOTTOM,
+            LEFT,
+            RIGHT,
+            NONE
+        }
+
+        public enum TypeScoreCounter
+        {
+            LIFE_POINTS,
+            POISON_COUNTERS,
+            NONE
+        }
+
+        public enum TypeScoreAction
+        {
+            UP_ONE,
+            DOWN_ONE,
+            UP_MULTIPLE,
+            DOWN_MULTIPLE,
+            DOUBLE,
+            HALF,
+            POISON_UP,
+            POISON_DOWN,
+            NONE
+        }
+
     }
 }

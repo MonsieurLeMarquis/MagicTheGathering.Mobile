@@ -17,15 +17,35 @@ namespace Common.Android.Drawing
             var textView = new FontFitTextView(activity, height, width);
             var background = new ShapeDrawable();
             textView.Background = background;
-            textView.Gravity = GravityFlags.CenterVertical | GravityFlags.CenterHorizontal;      
+            textView.Gravity = GravityFlags.CenterVertical | GravityFlags.CenterHorizontal;
             return textView;
         }
 
-        public static void SetText(TextView textView, string text, Color fontColor)
+        public static TextView DrawTextView(Activity activity)
+        {
+            var textView = new TextView(activity);
+            var background = new ShapeDrawable();
+            textView.Background = background;
+            textView.Gravity = GravityFlags.CenterVertical | GravityFlags.CenterHorizontal;
+            return textView;
+        }
+
+        public static void SetText(TextView textView, string text, int fontSize = 0)
+        {
+            if (textView != null)
+            {
+                textView.Text = text;
+                if (!(textView is FontFitTextView) && fontSize > 0)
+                {
+                    textView.TextSize = fontSize;
+                }
+            }
+        }
+
+        public static void SetFontColor(TextView textView, Color fontColor)
         {
             if (textView != null && fontColor != null)
             {
-                textView.Text = text;
                 textView.SetTextColor(fontColor);
             }
         }

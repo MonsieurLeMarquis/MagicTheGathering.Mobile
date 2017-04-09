@@ -1,3 +1,4 @@
+using Business.MtgLifeCounter.Configuration;
 using Business.MtgLifeCounter.Game;
 using Business.MtgLifeCounter.History;
 using static Business.MtgLifeCounter.Enumerations.Enum;
@@ -7,7 +8,36 @@ namespace Business.MtgLifeCounter.Managers
     public class ManagerScore
     {
 
-        public static void ScoreUp(Score score, TypePlayer typePlayer, HistoryAllGames history, bool poison = false, int value = 1)
+        public static void ScoreUpdate(Score score, TypePlayer typePlayer, HistoryAllGames history, TypeScoreAction action)
+        {
+            switch(action)
+            {
+                case TypeScoreAction.UP_ONE:
+                    ScoreUp(score, typePlayer, history);
+                    break;
+                case TypeScoreAction.DOWN_ONE:
+                    ScoreDown(score, typePlayer, history);
+                    break;
+                case TypeScoreAction.UP_MULTIPLE:
+                    ScoreUp(score, typePlayer, history, false, Config.ScoreStepMultiplePoints);
+                    break;
+                case TypeScoreAction.DOWN_MULTIPLE:
+                    ScoreDown(score, typePlayer, history, false, Config.ScoreStepMultiplePoints);
+                    break;
+                case TypeScoreAction.DOUBLE:
+                    ScoreDouble(score, typePlayer, history);
+                    break;
+                case TypeScoreAction.HALF:
+                    ScoreHalf(score, typePlayer, history);
+                    break;
+                case TypeScoreAction.POISON_UP:
+                    break;
+                case TypeScoreAction.POISON_DOWN:
+                    break;
+            }
+        }
+
+        private static void ScoreUp(Score score, TypePlayer typePlayer, HistoryAllGames history, bool poison = false, int value = 1)
         {
             switch (typePlayer)
             {
@@ -35,7 +65,7 @@ namespace Business.MtgLifeCounter.Managers
             ManagerHistory.AddScore(history, score);
         }
 
-        public static void ScoreDown(Score score, TypePlayer typePlayer, HistoryAllGames history, bool poison = false, int value = 1)
+        private static void ScoreDown(Score score, TypePlayer typePlayer, HistoryAllGames history, bool poison = false, int value = 1)
         {
             switch (typePlayer)
             {
@@ -63,7 +93,7 @@ namespace Business.MtgLifeCounter.Managers
             ManagerHistory.AddScore(history, score);
         }
 
-        public static void ScoreDouble(Score score, TypePlayer typePlayer, HistoryAllGames history)
+        private static void ScoreDouble(Score score, TypePlayer typePlayer, HistoryAllGames history)
         {
             switch (typePlayer)
             {
@@ -77,7 +107,7 @@ namespace Business.MtgLifeCounter.Managers
             ManagerHistory.AddScore(history, score);
         }
 
-        public static void ScoreHalf(Score score, TypePlayer typePlayer, HistoryAllGames history)
+        private static void ScoreHalf(Score score, TypePlayer typePlayer, HistoryAllGames history)
         {
             switch (typePlayer)
             {

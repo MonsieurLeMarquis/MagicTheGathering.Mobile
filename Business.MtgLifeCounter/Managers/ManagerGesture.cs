@@ -2,103 +2,101 @@ using Business.MtgLifeCounter.History;
 using Business.MtgLifeCounter.Game;
 using Common.Android.Gesture;
 using static Business.MtgLifeCounter.Enumerations.Enum;
+using Business.MtgLifeCounter.Configuration;
+using Business.MtgLifeCounter.Gesture;
 
 namespace Business.MtgLifeCounter.Managers
 {
     public class ManagerGesture
     {
 
-        public static bool GameGestureLeft(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
+        public static bool GameGestureSwipe(Widgets.Screen screen, Move move, Score score, HistoryAllGames history, TypeGesture gesture)
         {
             var refresh = false;
-            var typeZone = ManagerScreenScore.GetTypeZone(screen, move);
-            var typePlayer = ManagerScreenScore.GetTypePlayer(screen, move);
-            if (typeZone == TypeZone.PLAYER)
+            var gestureReport = GetGestureReport(screen, move);
+            var action = ConvertGestureToActionScore(gesture, gestureReport.TypeZone);
+            if (gestureReport.TypeZone != TypeZone.NONE)
             {
-                ManagerScore.ScoreHalf(score, typePlayer, history);
-                refresh = true;
-            }
-            if (typeZone == TypeZone.OPPONENT)
-            {
-                ManagerScore.ScoreDouble(score, typePlayer, history);
+                ManagerScore.ScoreUpdate(score, gestureReport.TypePlayer, history, action);
                 refresh = true;
             }
             return refresh;
         }
 
-        public static bool GameGestureRight(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
+        public static bool GameGestureSingleTap(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
         {
             var refresh = false;
-            var typeZone = ManagerScreenScore.GetTypeZone(screen, move);
-            var typePlayer = ManagerScreenScore.GetTypePlayer(screen, move);
-            if (typeZone == TypeZone.PLAYER)
+            var gestureReport = GetGestureReport(screen, move);
+            var action = TypeScoreAction.NONE;
+            if (gestureReport.Top)
             {
-                ManagerScore.ScoreDouble(score, typePlayer, history);
-                refresh = true;
+                action = ConvertGestureToActionScore(TypeGesture.TOP, gestureReport.TypeZone);
             }
-            if (typeZone == TypeZone.OPPONENT)
+            else if (gestureReport.Bottom)
             {
-                ManagerScore.ScoreHalf(score, typePlayer, history);
+                action = ConvertGestureToActionScore(TypeGesture.BOTTOM, gestureReport.TypeZone);
+            }
+            if (gestureReport.TypeZone != TypeZone.NONE && action != TypeScoreAction.NONE)
+            {
+                ManagerScore.ScoreUpdate(score, gestureReport.TypePlayer, history, action);
                 refresh = true;
             }
             return refresh;
         }
 
-        public static bool GameGestureUp(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
+        private static GestureReport GetGestureReport(Widgets.Screen screen, Move move)
         {
-            var refresh = false;
-            var typeZone = ManagerScreenScore.GetTypeZone(screen, move);
-            var typePlayer = ManagerScreenScore.GetTypePlayer(screen, move);
-            if (typeZone == TypeZone.PLAYER)
+            return new GestureReport()
             {
-                ManagerScore.ScoreUp(score, typePlayer, history, false, 5);
-                refresh = true;
-            }
-            if (typeZone == TypeZone.OPPONENT)
-            {
-                ManagerScore.ScoreDown(score, typePlayer, history, false, 5);
-                refresh = true;
-            }
-            return refresh;
+                TypeScore = ManagerScreenScore.GetTypeScore(screen, move),
+                TypeZone = ManagerScreenScore.GetTypeZone(screen, move),
+                TypePlayer = ManagerScreenScore.GetTypePlayer(screen, move),
+                Top = ManagerScreenScore.GestureInScoreTop(screen, move),
+                Bottom = ManagerScreenScore.GestureInScoreBottom(screen, move),
+                Left = ManagerScreenScore.GestureInScoreLeft(screen, move),
+                Right = ManagerScreenScore.GestureInScoreRight(screen, move)
+            };
         }
 
-        public static bool GameGestureDown(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
+        public static TypeScoreAction ConvertGestureToActionScore(TypeGesture gesture, TypeZone zone)
         {
-            var refresh = false;
-            var typeZone = ManagerScreenScore.GetTypeZone(screen, move);
-            var typePlayer = ManagerScreenScore.GetTypePlayer(screen, move);
-            if (typeZone == TypeZone.PLAYER)
+            var action = TypeScoreAction.NONE;
+            if (zone == TypeZone.PLAYER)
             {
-                ManagerScore.ScoreDown(score, typePlayer, history, false, 5);
-                refresh = true;
+                action = Config.GesturesActions[gesture];
             }
-            if (typeZone == TypeZone.OPPONENT)
+            if (zone == TypeZone.OPPONENT)
             {
-                ManagerScore.ScoreUp(score, typePlayer, history, false, 5);
-                refresh = true;
+                action = GetOppositeAction(Config.GesturesActions[gesture]);
             }
-            return refresh;
+            return action;
         }
 
-        public static bool GameSingleTap(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
+        public static TypeScoreAction GetOppositeAction(TypeScoreAction action)
         {
-            var refresh = false;
-            var typeScore = ManagerScreenScore.GetTypeScore(screen, move);
-            var typeZone = ManagerScreenScore.GetTypeZone(screen, move);
-            var typePlayer = ManagerScreenScore.GetTypePlayer(screen, move);
-            var top = ManagerScreenScore.GestureInScoreTop(screen, move);
-            var bottom = ManagerScreenScore.GestureInScoreBottom(screen, move);
-            if((typeZone == TypeZone.OPPONENT && bottom) || (typeZone == TypeZone.PLAYER && top))
+            var oppositeAction = TypeScoreAction.NONE;
+            switch(action)
             {
-                ManagerScore.ScoreUp(score, typePlayer, history);
-                refresh = true;
+                case TypeScoreAction.UP_ONE:
+                    oppositeAction = TypeScoreAction.DOWN_ONE;
+                    break;
+                case TypeScoreAction.DOWN_ONE:
+                    oppositeAction = TypeScoreAction.UP_ONE;
+                    break;
+                case TypeScoreAction.UP_MULTIPLE:
+                    oppositeAction = TypeScoreAction.DOWN_MULTIPLE;
+                    break;
+                case TypeScoreAction.DOWN_MULTIPLE:
+                    oppositeAction = TypeScoreAction.UP_MULTIPLE;
+                    break;
+                case TypeScoreAction.DOUBLE:
+                    oppositeAction = TypeScoreAction.HALF;
+                    break;
+                case TypeScoreAction.HALF:
+                    oppositeAction = TypeScoreAction.DOUBLE;
+                    break;
             }
-            if ((typeZone == TypeZone.OPPONENT && top) || (typeZone == TypeZone.PLAYER && bottom))
-            {
-                ManagerScore.ScoreDown(score, typePlayer, history);
-                refresh = true;
-            }
-            return refresh;
+            return oppositeAction;
         }
 
     }

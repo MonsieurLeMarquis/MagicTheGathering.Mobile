@@ -42,7 +42,8 @@ namespace UI.MtgLifeCounter.Android.Drawings
 
         private static void DrawFontFitTextView(TextView textView, string text, string font, Color fontColor, Drawing.ThemeDrawable theme, FrameLayout frameLayout, Activity activity)
         {
-            Drawing.ManagerDrawing.SetText(textView, text, fontColor);
+            Drawing.ManagerDrawing.SetText(textView, text);
+            Drawing.ManagerDrawing.SetFontColor(textView, fontColor);
             Drawing.ManagerDrawing.SetTheme(textView, theme);
             Drawing.ManagerDrawing.SetFont(textView, font, activity);
         }
@@ -65,14 +66,14 @@ namespace UI.MtgLifeCounter.Android.Drawings
             }
         }
 
-        public static void RefreshScores(Screen screen, Game.Score score)
+        public static void RefreshScores(Screen screen, Game.Score score, Activity activity)
         {
             if (ManagerScreen.IsValid(screen))
             {
-                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), Colors.FontColor_Score);
-                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScorePlayer.Widget, score.LifePoints_Player.ToString(), Colors.FontColor_Score);
-                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScorePlayer.Widget, score.LifePoints_Player.ToString(), Colors.FontColor_Score);
-                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), Colors.FontColor_Score);
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), ManagerSize.GetOptimalFontSize(score.LifePoints_Opponent.ToString(), screen.ZoneOpponent.ScoreOpponent.Width, activity));
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScorePlayer.Widget, score.LifePoints_Player.ToString(), ManagerSize.GetOptimalFontSize(score.LifePoints_Player.ToString(), screen.ZoneOpponent.ScorePlayer.Width, activity));
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScorePlayer.Widget, score.LifePoints_Player.ToString(), ManagerSize.GetOptimalFontSize(score.LifePoints_Player.ToString(), screen.ZonePlayer.ScorePlayer.Width, activity));
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), ManagerSize.GetOptimalFontSize(score.LifePoints_Opponent.ToString(), screen.ZonePlayer.ScoreOpponent.Width, activity));
             }
         }
 

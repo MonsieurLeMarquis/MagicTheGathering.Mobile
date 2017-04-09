@@ -137,23 +137,23 @@ namespace UI.MtgLifeCounter.Android
 			// aapt resource value: 0x7f080004
 			public const int frame_container = 2131230724;
 			
-			// aapt resource value: 0x7f080003
-			public const int frame_main = 2131230723;
+			// aapt resource value: 0x7f080000
+			public const int frame_main = 2131230720;
 			
 			// aapt resource value: 0x7f080008
 			public const int ivMenuImg = 2131230728;
 			
-			// aapt resource value: 0x7f080001
-			public const int menuIconImgView = 2131230721;
+			// aapt resource value: 0x7f080002
+			public const int menuIconImgView = 2131230722;
 			
 			// aapt resource value: 0x7f080007
 			public const int menuListView = 2131230727;
 			
-			// aapt resource value: 0x7f080000
-			public const int titleBarLinearLayout = 2131230720;
+			// aapt resource value: 0x7f080001
+			public const int titleBarLinearLayout = 2131230721;
 			
-			// aapt resource value: 0x7f080002
-			public const int txtActionBarText = 2131230722;
+			// aapt resource value: 0x7f080003
+			public const int txtActionBarText = 2131230723;
 			
 			// aapt resource value: 0x7f080005
 			public const int txtDescription = 2131230725;

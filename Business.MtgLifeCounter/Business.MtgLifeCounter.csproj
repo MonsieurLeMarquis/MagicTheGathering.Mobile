@@ -43,9 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Config.cs" />
     <Compile Include="Constants\Const.cs" />
     <Compile Include="Enumerations\Enum.cs" />
     <Compile Include="Game\Score.cs" />
+    <Compile Include="Gesture\GestureReport.cs" />
     <Compile Include="History\HistoryAllGames.cs" />
     <Compile Include="History\HistoryGame.cs" />
     <Compile Include="History\HistoryScore.cs" />
