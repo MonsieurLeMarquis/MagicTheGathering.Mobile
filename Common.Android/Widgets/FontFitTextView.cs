@@ -20,7 +20,7 @@ namespace Common.Android.Widgets
         public int _previousSizeFont = 0;
         public string _previousText = "";
 
-        public FontFitTextView(Context context, int height, int width, int fontSize = 100, double percentSize = 0.75d) : base(context)
+        public FontFitTextView(Context context, int height, int width, int fontSize = 100, double percentSize = 0.90d) : base(context)
         {
             FONT_SIZE = fontSize;
             PERCENT_SIZE = percentSize;
@@ -60,11 +60,11 @@ namespace Common.Android.Widgets
                     }
 
                 }
-                else
+                /*else
                 {
                     // Third : set the right font size
                     SetTextSize(ComplexUnitType.Sp, _previousSizeFont);
-                }
+                }*/
                 
             }
 

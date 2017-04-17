@@ -18,14 +18,14 @@ namespace UI.MtgLifeCounter.Android.Drawings
             if (ManagerScreen.IsValid(screen) && frameLayout != null)
             {
 
-                DrawFontFitTextView(screen.ZoneOpponent.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
-                DrawFontFitTextView(screen.ZoneOpponent.ScorePlayer.Widget, score.LifePoints_Player.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
-                DrawFontFitTextView(screen.ZonePlayer.ScorePlayer.Widget, score.LifePoints_Player.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
-                DrawFontFitTextView(screen.ZonePlayer.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
-                DrawFontFitTextView(screen.ZoneOpponent.NameOpponent.Widget, "P B", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
-                DrawFontFitTextView(screen.ZoneOpponent.NamePlayer.Widget, "Player", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
-                DrawFontFitTextView(screen.ZonePlayer.NamePlayer.Widget, "Player name A", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
-                DrawFontFitTextView(screen.ZonePlayer.NameOpponent.Widget, "B", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
+                DrawFontFitTextView(screen.ZoneOpponent.ScoreOpponent.Widget, "0", "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
+                DrawFontFitTextView(screen.ZoneOpponent.ScorePlayer.Widget, "0", "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
+                DrawFontFitTextView(screen.ZonePlayer.ScorePlayer.Widget, "0", "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
+                DrawFontFitTextView(screen.ZonePlayer.ScoreOpponent.Widget, "0", "Fonts/ComicBook.ttf", Colors.FontColor_Score, Themes.Score, frameLayout, activity);
+                DrawFontFitTextView(screen.ZoneOpponent.NameOpponent.Widget, "", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
+                DrawFontFitTextView(screen.ZoneOpponent.NamePlayer.Widget, "", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
+                DrawFontFitTextView(screen.ZonePlayer.NamePlayer.Widget, "", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
+                DrawFontFitTextView(screen.ZonePlayer.NameOpponent.Widget, "", "Fonts/ComicBook.ttf", Colors.FontColor_PlayerName, Themes.PlayerName, frameLayout, activity);
 
                 DrawScore(screen.ZoneOpponent.ScoreOpponent, ManagerScreen.GetPosition_ZoneOpponent_ScoreOpponent(screen), frameLayout, true);
                 DrawScore(screen.ZoneOpponent.ScorePlayer, ManagerScreen.GetPosition_ZoneOpponent_ScorePlayer(screen), frameLayout, true);
@@ -66,14 +66,37 @@ namespace UI.MtgLifeCounter.Android.Drawings
             }
         }
 
-        public static void RefreshScores(Screen screen, Game.Score score, Activity activity)
+        public static void RefreshAll(Screen screen, Game.Score score)
+        {
+            RefreshScores(screen, score);
+            RefreshPlayersNames(screen);
+        }
+
+        public static void RefreshScores(Screen screen, Game.Score score)
         {
             if (ManagerScreen.IsValid(screen))
             {
-                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), ManagerSize.GetOptimalFontSize(score.LifePoints_Opponent.ToString(), screen.ZoneOpponent.ScoreOpponent.Width, activity));
-                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScorePlayer.Widget, score.LifePoints_Player.ToString(), ManagerSize.GetOptimalFontSize(score.LifePoints_Player.ToString(), screen.ZoneOpponent.ScorePlayer.Width, activity));
-                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScorePlayer.Widget, score.LifePoints_Player.ToString(), ManagerSize.GetOptimalFontSize(score.LifePoints_Player.ToString(), screen.ZonePlayer.ScorePlayer.Width, activity));
-                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString(), ManagerSize.GetOptimalFontSize(score.LifePoints_Opponent.ToString(), screen.ZonePlayer.ScoreOpponent.Width, activity));
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString());
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScorePlayer.Widget, score.LifePoints_Player.ToString());
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScorePlayer.Widget, score.LifePoints_Player.ToString());
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString());
+            }
+        }
+
+        public static void RefreshPlayersNames(Screen screen)
+        {
+            if (ManagerScreen.IsValid(screen))
+            {
+                /*
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScoreOpponent.Widget, screen.ZoneOpponent.ScoreOpponent.Widget.Text);
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScorePlayer.Widget, screen.ZoneOpponent.ScorePlayer.Widget.Text);
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScorePlayer.Widget, screen.ZonePlayer.ScorePlayer.Widget.Text);
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScoreOpponent.Widget, screen.ZonePlayer.ScoreOpponent.Widget.Text);
+                */
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.NameOpponent.Widget, "Player");
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.NamePlayer.Widget, "Long Player Name");
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.NamePlayer.Widget, "P");
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.NameOpponent.Widget, "Very Very Long Player Name");
             }
         }
 

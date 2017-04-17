@@ -10,22 +10,19 @@ namespace Business.MtgLifeCounter.Managers
     public class ManagerGesture
     {
 
-        public static bool GameGestureSwipe(Widgets.Screen screen, Move move, Score score, HistoryAllGames history, TypeGesture gesture)
+        public static GestureReport GameGestureSwipe(Widgets.Screen screen, Move move, Score score, HistoryAllGames history, TypeGesture gesture)
         {
-            var refresh = false;
             var gestureReport = GetGestureReport(screen, move);
             var action = ConvertGestureToActionScore(gesture, gestureReport.TypeZone);
             if (gestureReport.TypeZone != TypeZone.NONE)
             {
                 ManagerScore.ScoreUpdate(score, gestureReport.TypePlayer, history, action);
-                refresh = true;
             }
-            return refresh;
+            return gestureReport;
         }
 
-        public static bool GameGestureSingleTap(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
+        public static GestureReport GameGestureSingleTap(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
         {
-            var refresh = false;
             var gestureReport = GetGestureReport(screen, move);
             var action = TypeScoreAction.NONE;
             if (gestureReport.Top)
@@ -39,9 +36,8 @@ namespace Business.MtgLifeCounter.Managers
             if (gestureReport.TypeZone != TypeZone.NONE && action != TypeScoreAction.NONE)
             {
                 ManagerScore.ScoreUpdate(score, gestureReport.TypePlayer, history, action);
-                refresh = true;
             }
-            return refresh;
+            return gestureReport;
         }
 
         private static GestureReport GetGestureReport(Widgets.Screen screen, Move move)
@@ -58,7 +54,7 @@ namespace Business.MtgLifeCounter.Managers
             };
         }
 
-        public static TypeScoreAction ConvertGestureToActionScore(TypeGesture gesture, TypeZone zone)
+        private static TypeScoreAction ConvertGestureToActionScore(TypeGesture gesture, TypeZone zone)
         {
             var action = TypeScoreAction.NONE;
             if (zone == TypeZone.PLAYER)
@@ -72,7 +68,7 @@ namespace Business.MtgLifeCounter.Managers
             return action;
         }
 
-        public static TypeScoreAction GetOppositeAction(TypeScoreAction action)
+        private static TypeScoreAction GetOppositeAction(TypeScoreAction action)
         {
             var oppositeAction = TypeScoreAction.NONE;
             switch(action)

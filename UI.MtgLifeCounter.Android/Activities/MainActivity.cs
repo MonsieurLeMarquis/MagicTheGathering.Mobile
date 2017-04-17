@@ -14,6 +14,9 @@ using Game = Business.MtgLifeCounter.Game;
 using Business.MtgLifeCounter.History;
 using AndroidDrawing = Common.Android.Drawing;
 using static Business.MtgLifeCounter.Enumerations.Enum;
+using System;
+using Android.Views.Animations;
+using Business.MtgLifeCounter.Gesture;
 
 namespace UI.MtgLifeCounter.Android.Activities
 {
@@ -21,14 +24,24 @@ namespace UI.MtgLifeCounter.Android.Activities
 	[Activity (Label = "MtgLifeCounter", MainLauncher = false, Icon = "@mipmap/icon", ScreenOrientation = ScreenOrientation.Portrait, Theme = "@android:style/Theme.Black.NoTitleBar.Fullscreen")]
 	public class MainActivity : BaseActivityMenu
     {
-      
+ 
+        // Widgets     
         private FrameLayout _frameLayout;
-        private AndroidGesture.ManagerGesture _managerGesture;
-        private Screen _screen;
         private ImageView _imageOpponent;
         private ImageView _imagePlayer;
+        private Animation _animationScoreTopYou;
+        private Animation _animationScoreTopOpponent;
+        private Animation _animationScoreBottomYou;
+        private Animation _animationScoreBottomOpponent;
+        // Listener
+        private AndroidGesture.ManagerGesture _managerGesture;
+        // Business
+        private Screen _screen;
         private Game.Score _score;
         private HistoryAllGames _history;
+        // Setup
+        private bool _enableGesture = true;
+        private bool _enableAnimation = true;
 
         protected override void OnCreate (Bundle savedInstanceState)
 		{
@@ -41,11 +54,18 @@ namespace UI.MtgLifeCounter.Android.Activities
 
             InitializeMenu();
             InitializeGesture();
+            InitializeAnimation();
             InitializeScreen();
             DrawScreen();
-
+            
             ScreenReference = _screen;
             HistoryReference = _history;
+        }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            ManagerDrawing.RefreshScores(_screen, _score);
         }
 
         #region INITIALIZATION
@@ -55,12 +75,27 @@ namespace UI.MtgLifeCounter.Android.Activities
             InitializeMenu(ResourcesMenu.ListMenuItems(this));
         }
 
+        private void InitializeAnimation()
+        {
+            _animationScoreTopYou = AnimationUtils.LoadAnimation(this, Resource.Animation.change_score_inverse_life);
+            _animationScoreTopOpponent = AnimationUtils.LoadAnimation(this, Resource.Animation.change_score_inverse_life);
+            _animationScoreBottomYou = AnimationUtils.LoadAnimation(this, Resource.Animation.change_score_life);
+            _animationScoreBottomOpponent = AnimationUtils.LoadAnimation(this, Resource.Animation.change_score_life);
+        }
+
         private void InitializeScreen()
         {
             _frameLayout = FindViewById<FrameLayout>(Resource.Id.frame_main);
             _screen = GameManagers.ManagerWidgets.CreateWidgets(this);
             _imageOpponent = AndroidDrawing.ManagerDrawing.DrawImageView(Resource.Drawable.wallpaper_opponent, this);
             _imagePlayer = AndroidDrawing.ManagerDrawing.DrawImageView(Resource.Drawable.wallpaper_player, this);
+            _frameLayout.ViewTreeObserver.GlobalLayout += InitializeTexts;
+        }
+
+        private void InitializeTexts (object sender, EventArgs arg)
+        {
+            ManagerDrawing.RefreshAll(_screen, _score);
+            _frameLayout.ViewTreeObserver.GlobalLayout -= InitializeTexts;
         }
 
         private void InitializeGesture()
@@ -91,42 +126,97 @@ namespace UI.MtgLifeCounter.Android.Activities
 
         protected void GameGestureLeft()
         {
-            if (GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_LEFT))
+            if (_enableGesture)
             {
-                ManagerDrawing.RefreshScores(_screen, _score, this);
+                var reportGesture = GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_LEFT);
+                RefreshScore(reportGesture);
             }
         }
 
         protected void GameGestureRight()
         {
-            if (GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_RIGHT))
+            if (_enableGesture)
             {
-                ManagerDrawing.RefreshScores(_screen, _score, this);
+                var reportGesture = GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_RIGHT);
+                RefreshScore(reportGesture);
             }
         }
 
         protected void GameGestureUp()
         {
-            if (GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_UP))
+            if (_enableGesture)
             {
-                ManagerDrawing.RefreshScores(_screen, _score, this);
+                var reportGesture = GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_UP);
+                RefreshScore(reportGesture);
             }
         }
 
         protected void GameGestureDown()
         {
-            if (GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_DOWN))
+            if (_enableGesture)
             {
-                ManagerDrawing.RefreshScores(_screen, _score, this);
+                var reportGesture = GameManagers.ManagerGesture.GameGestureSwipe(_screen, gestureListener.LastMove, _score, _history, TypeGesture.SWIPE_DOWN);
+                RefreshScore(reportGesture);
             }
         }
 
         protected void GameSingleTap()
         {
-            if (GameManagers.ManagerGesture.GameGestureSingleTap(_screen, gestureListener.LastMove, _score, _history))
+            if (_enableGesture)
             {
-                ManagerDrawing.RefreshScores(_screen, _score, this);
+                var reportGesture = GameManagers.ManagerGesture.GameGestureSingleTap(_screen, gestureListener.LastMove, _score, _history);
+                RefreshScore(reportGesture);
             }
+        }
+
+        #endregion
+
+        #region REFRESH
+
+        protected void RefreshScore(GestureReport gestureReport)
+        {
+            if (gestureReport.TypeScore != TypeScore.NONE)
+            {
+                ManagerDrawing.RefreshScores(_screen, _score);
+                if (gestureReport.TypeScore == TypeScore.ZONE_OPPONENT_SCORE_OPPONENT || gestureReport.TypeScore == TypeScore.ZONE_PLAYER_SCORE_OPPONENT)
+                {
+                    AnimationPointsOpponent();
+                }
+                if (gestureReport.TypeScore == TypeScore.ZONE_OPPONENT_SCORE_PLAYER || gestureReport.TypeScore == TypeScore.ZONE_PLAYER_SCORE_PLAYER)
+                {
+                    AnimationPointsYou();
+                }
+            }
+        }
+
+        #endregion
+
+        #region ANIMATIONS
+
+        private void AnimationPointsYou()
+        {
+            if (_enableAnimation)
+            {
+                AnimationPoints(_animationScoreTopYou, _animationScoreBottomYou, _screen.ZoneOpponent.ScorePlayer.Widget, _screen.ZonePlayer.ScorePlayer.Widget);
+            }
+        }
+
+        private void AnimationPointsOpponent()
+        {
+            if (_enableAnimation)
+            {
+                AnimationPoints(_animationScoreTopOpponent, _animationScoreBottomOpponent, _screen.ZoneOpponent.ScoreOpponent.Widget, _screen.ZonePlayer.ScoreOpponent.Widget);
+            }
+        }
+
+        private void AnimationPoints(Animation animationTop, Animation animationBottom, TextView scoreTop, TextView scoreBottom)
+        {
+            animationTop.Reset();
+            animationBottom.Reset();
+            scoreTop.ClearAnimation();
+            scoreBottom.ClearAnimation();
+            scoreTop.StartAnimation(animationTop);
+            scoreBottom.StartAnimation(animationBottom);
         }
 
         #endregion
