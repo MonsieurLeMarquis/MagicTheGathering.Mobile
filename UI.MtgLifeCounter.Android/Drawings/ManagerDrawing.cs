@@ -76,10 +76,10 @@ namespace UI.MtgLifeCounter.Android.Drawings
         {
             if (ManagerScreen.IsValid(screen))
             {
-                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString());
-                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScorePlayer.Widget, score.LifePoints_Player.ToString());
-                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScorePlayer.Widget, score.LifePoints_Player.ToString());
-                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScoreOpponent.Widget, score.LifePoints_Opponent.ToString());
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScoreOpponent.Widget, ManagerScore.GetScoreText(score.LifePoints_Opponent));
+                Drawing.ManagerDrawing.SetText(screen.ZoneOpponent.ScorePlayer.Widget, ManagerScore.GetScoreText(score.LifePoints_Player));
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScorePlayer.Widget, ManagerScore.GetScoreText(score.LifePoints_Player));
+                Drawing.ManagerDrawing.SetText(screen.ZonePlayer.ScoreOpponent.Widget, ManagerScore.GetScoreText(score.LifePoints_Opponent));
             }
         }
 
