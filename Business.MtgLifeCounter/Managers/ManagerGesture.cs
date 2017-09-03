@@ -9,30 +9,11 @@ namespace Business.MtgLifeCounter.Managers
 {
     public class ManagerGesture
     {
-
-        public static GestureReport GameGestureSwipe(Widgets.Screen screen, Move move, Score score, HistoryAllGames history, TypeGesture gesture)
+        
+        public static GestureReport GameGesture(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
         {
             var gestureReport = GetGestureReport(screen, move);
-            var action = ConvertGestureToActionScore(gesture, gestureReport.TypeZone);
-            if (gestureReport.TypeZone != TypeZone.NONE)
-            {
-                ManagerScore.ScoreUpdate(score, gestureReport.TypePlayer, history, action);
-            }
-            return gestureReport;
-        }
-
-        public static GestureReport GameGestureSingleTap(Widgets.Screen screen, Move move, Score score, HistoryAllGames history)
-        {
-            var gestureReport = GetGestureReport(screen, move);
-            var action = TypeScoreAction.NONE;
-            if (gestureReport.Top)
-            {
-                action = ConvertGestureToActionScore(TypeGesture.TOP, gestureReport.TypeZone);
-            }
-            else if (gestureReport.Bottom)
-            {
-                action = ConvertGestureToActionScore(TypeGesture.BOTTOM, gestureReport.TypeZone);
-            }
+            var action = ConvertGestureToActionScore(gestureReport);
             if (gestureReport.TypeZone != TypeZone.NONE && action != TypeScoreAction.NONE)
             {
                 ManagerScore.ScoreUpdate(score, gestureReport.TypePlayer, history, action);
@@ -42,28 +23,71 @@ namespace Business.MtgLifeCounter.Managers
 
         private static GestureReport GetGestureReport(Widgets.Screen screen, Move move)
         {
+            var typeGesture = TypeGesture.NONE;
+
+            if (move.IsLine)
+            {
+                if (move.MoveUp)
+                {
+                    typeGesture = TypeGesture.SWIPE_UP;
+                }
+                else if (move.MoveDown)
+                {
+                    typeGesture = TypeGesture.SWIPE_DOWN;
+                }
+                else if (move.MoveLeft)
+                {
+                    typeGesture = TypeGesture.SWIPE_LEFT;
+                }
+                else if (move.MoveRight)
+                {
+                    typeGesture = TypeGesture.SWIPE_RIGHT;
+                }
+            }
+            else if (move.IsPoint)
+            {
+                if (ManagerScreenScore.GestureInScoreTop(screen, move))
+                {
+                    typeGesture = TypeGesture.TAP_TOP;
+                }
+                else if (ManagerScreenScore.GestureInScoreBottom(screen, move))
+                {
+                    typeGesture = TypeGesture.TAP_BOTTOM;
+                }
+                /*
+                else if (ManagerScreenScore.GestureInScoreLeft(screen, move))
+                {
+                    typeGesture = TypeGesture.TAP_LEFT;
+                }
+                else if (ManagerScreenScore.GestureInScoreRight(screen, move))
+                {
+                    typeGesture = TypeGesture.TAP_RIGHT;
+                }
+                */
+            }
+
             return new GestureReport()
             {
                 TypeScore = ManagerScreenScore.GetTypeScore(screen, move),
                 TypeZone = ManagerScreenScore.GetTypeZone(screen, move),
                 TypePlayer = ManagerScreenScore.GetTypePlayer(screen, move),
-                Top = ManagerScreenScore.GestureInScoreTop(screen, move),
-                Bottom = ManagerScreenScore.GestureInScoreBottom(screen, move),
-                Left = ManagerScreenScore.GestureInScoreLeft(screen, move),
-                Right = ManagerScreenScore.GestureInScoreRight(screen, move)
+                TypeGesture = typeGesture
             };
         }
 
-        private static TypeScoreAction ConvertGestureToActionScore(TypeGesture gesture, TypeZone zone)
+        private static TypeScoreAction ConvertGestureToActionScore(GestureReport gestureReport)
         {
             var action = TypeScoreAction.NONE;
-            if (zone == TypeZone.PLAYER)
+            if (gestureReport.TypeGesture != TypeGesture.NONE)
             {
-                action = Config.GesturesActions[gesture];
-            }
-            if (zone == TypeZone.OPPONENT)
-            {
-                action = GetOppositeAction(Config.GesturesActions[gesture]);
+                if (gestureReport.TypeZone == TypeZone.PLAYER)
+                {
+                    action = Config.GesturesActions[gestureReport.TypeGesture];
+                }
+                if (gestureReport.TypeZone == TypeZone.OPPONENT)
+                {
+                    action = GetOppositeAction(Config.GesturesActions[gestureReport.TypeGesture]);
+                }
             }
             return action;
         }

@@ -28,10 +28,10 @@ namespace Business.MtgLifeCounter.Configuration
                     { TypeGesture.SWIPE_DOWN, TypeScoreAction.DOWN_MULTIPLE },
                     { TypeGesture.SWIPE_LEFT, TypeScoreAction.HALF },
                     { TypeGesture.SWIPE_RIGHT, TypeScoreAction.DOUBLE },
-                    { TypeGesture.TOP, TypeScoreAction.UP_ONE },
-                    { TypeGesture.BOTTOM, TypeScoreAction.DOWN_ONE },
-                    { TypeGesture.LEFT, TypeScoreAction.NONE },
-                    { TypeGesture.RIGHT, TypeScoreAction.NONE }
+                    { TypeGesture.TAP_TOP, TypeScoreAction.UP_ONE },
+                    { TypeGesture.TAP_BOTTOM, TypeScoreAction.DOWN_ONE },
+                    { TypeGesture.TAP_LEFT, TypeScoreAction.NONE },
+                    { TypeGesture.TAP_RIGHT, TypeScoreAction.NONE }
                 };
             }
         }

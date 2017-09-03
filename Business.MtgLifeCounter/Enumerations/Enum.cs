@@ -32,10 +32,10 @@ namespace Business.MtgLifeCounter.Enumerations
             SWIPE_RIGHT,
             SWIPE_UP,
             SWIPE_DOWN,
-            TOP,
-            BOTTOM,
-            LEFT,
-            RIGHT,
+            TAP_TOP,
+            TAP_BOTTOM,
+            TAP_LEFT,
+            TAP_RIGHT,
             NONE
         }
 

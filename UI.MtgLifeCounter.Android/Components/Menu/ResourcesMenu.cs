@@ -17,7 +17,7 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
                     Icon = Resource.Drawable.menu_history,
                     Action = new MenuItemAction {
                         TypeAction = MenuItemAction.TYPE_ACTION.LOAD_FRAGMENT,
-                        Screen = typeof(HistoryFragment)
+                        Screen = typeof(MainFragment)
                     }
                 },
                 new MenuItem () { 

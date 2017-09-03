@@ -9,10 +9,10 @@ using System.Linq;
 using Common.Android.Fragments;
 using UI.MtgLifeCounter.Android.Activities;
 using Common.Android.Gesture;
-using Business.MtgLifeCounter.Widgets;
+using UI.MtgLifeCounter.Android.Fragments;
 using Business.MtgLifeCounter.Managers;
-using Business.MtgLifeCounter.History;
-using GameEnum = Business.MtgLifeCounter.Enumerations;
+using Business.MtgLifeCounter.Context;
+using static Business.MtgLifeCounter.Enumerations.Enum;
 
 namespace UI.MtgLifeCounter.Android.Components.Menu
 {
@@ -21,8 +21,8 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 	public class BaseActivityMenu : BaseActivity
 	{
 
-        private GestureDetector gestureDetector;
-		public GestureListener gestureListener;
+        //private GestureDetector gestureDetector;
+		//public GestureListener gestureListener;
         private ListView menuListView;
         private MenuListAdapter objAdapterMenu;
         private ImageView menuIconImageView;
@@ -33,15 +33,17 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
         private ImageView btnDescExpander;
 		private List<MenuItem> MenuItems = new List<MenuItem>();
 
-        public Screen ScreenReference { get; set; }
-        public HistoryAllGames HistoryReference { get; set; } 
+        public Type CurrentFragment { get; set; }
 
-		protected void InitializeMenu(List<MenuItem> menuItems)
+        public MainFragment MainFragment { get; set; }
+
+        protected void InitializeMenu(List<MenuItem> menuItems)
 		{
 			MenuItems = menuItems;
 			FnInitialization (); 
 			TapEvent ();  
-			FnBindMenu (); 
+			FnBindMenu ();
+            CurrentFragment = typeof(MainFragment);
 		}
 
 		protected void TapEvent()
@@ -64,13 +66,6 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 
 		protected void FnInitialization()
 		{
-			//gesture initialization
-			gestureListener = new GestureListener ();  
-			gestureListener.LeftEvent += GestureLeft; //find definition in below steps
-			gestureListener.RightEvent += GestureRight; 
-			gestureListener.SingleTapEvent += SingleTap;  
-			gestureDetector = new GestureDetector (this,gestureListener);
-
 			menuListView = FindViewById<ListView> ( Resource.Id.menuListView );
 			menuIconImageView = FindViewById<ImageView> ( Resource.Id.menuIconImgView );
 			txtActionBarText = FindViewById<TextView> ( Resource.Id.txtActionBarText );
@@ -131,7 +126,8 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
                                 txtDescription.Visibility = ViewStates.Gone;
                             }
                             // Lancement du fragment
-							ManagerFragment.Launch (base.FragmentManager, (Fragment)action.GetScreenInstance (), Resource.Id.frame_container);	
+                            CurrentFragment = action.Screen;
+                            ManagerFragment.Launch (base.FragmentManager, (Fragment)action.GetScreenInstance (), Resource.Id.frame_container);	
 						}
 						break;
 					case MenuItemAction.TYPE_ACTION.LOAD_ACTIVITY:
@@ -142,43 +138,35 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 			}
 		}
 
-		protected void GestureLeft()
-		{
-            if (ScreenReference != null && ManagerScreenScore.GetTypeScore(ScreenReference, gestureListener.LastMove) == GameEnum.Enum.TypeScore.NONE
-                && menuListView.IsShown)
-				FnToggleMenu (); 
-			isSingleTapFired = false; 
-		}
-
-		protected void GestureRight()
+        protected void GestureMenuGestureLeft()
         {
-            if (ScreenReference != null && ManagerScreenScore.GetTypeScore(ScreenReference, gestureListener.LastMove) == GameEnum.Enum.TypeScore.NONE
-                && !menuListView.IsShown)
-                FnToggleMenu (); 
-			isSingleTapFired = false; 
-		}
+            if (menuListView.IsShown)
+                FnToggleMenu();
+            isSingleTapFired = false;
+        }
 
-		protected void SingleTap()
-		{
-			if ( menuListView.IsShown )
-			{
-				FnToggleMenu ();
-				isSingleTapFired = true;
-			}
-			else
-			{
-				isSingleTapFired = false;
-			}
-		}
+        protected void GestureMenuGestureRight()
+        {
+            if (!menuListView.IsShown)
+                FnToggleMenu();
+            isSingleTapFired = false;
+        }
 
-		public override bool DispatchTouchEvent (MotionEvent ev)
-		{
-			gestureDetector.OnTouchEvent ( ev );
-			return base.DispatchTouchEvent (ev); 
-		}
+        protected void GestureMenuSingleTap()
+        {
+            if (menuListView.IsShown)
+            {
+                FnToggleMenu();
+                isSingleTapFired = true;
+            }
+            else
+            {
+                isSingleTapFired = false;
+            }
+        }
 
-		//toggling the left menu
-		protected void FnToggleMenu()
+        //toggling the left menu
+        protected void FnToggleMenu()
 		{
 			Console.WriteLine ( menuListView.IsShown );
 			if(menuListView.IsShown)
@@ -205,7 +193,7 @@ namespace UI.MtgLifeCounter.Android.Components.Menu
 				txtDescription.Animation.Duration = 300;
 				btnDescExpander.SetImageResource (Resource.Drawable.up_arrow); 
 			} else {
-                txtDescription.Text = ManagerHistory.GetString(HistoryReference);
+                txtDescription.Text = "DEV"/*ManagerHistory.GetString(HistoryReference)*/;
 				txtDescription.Visibility = ViewStates.Visible;
 				txtDescription.RequestFocus (); 
 				txtDescription.Animation = new  TranslateAnimation (0f, 0f, txtDescription.MeasuredHeight, 0f);

@@ -218,22 +218,25 @@ namespace UI.MtgLifeCounter.Android
 			public const int Fragment_History = 2130968582;
 			
 			// aapt resource value: 0x7f040007
-			public const int Fragment_Menu_Item = 2130968583;
+			public const int Fragment_Main = 2130968583;
 			
 			// aapt resource value: 0x7f040008
-			public const int Fragment_Rate = 2130968584;
+			public const int Fragment_Menu_Item = 2130968584;
 			
 			// aapt resource value: 0x7f040009
-			public const int Fragment_Reload = 2130968585;
+			public const int Fragment_Rate = 2130968585;
 			
 			// aapt resource value: 0x7f04000a
-			public const int Fragment_Rules = 2130968586;
+			public const int Fragment_Reload = 2130968586;
 			
 			// aapt resource value: 0x7f04000b
-			public const int Fragment_Search = 2130968587;
+			public const int Fragment_Rules = 2130968587;
 			
 			// aapt resource value: 0x7f04000c
-			public const int Fragment_Settings = 2130968588;
+			public const int Fragment_Search = 2130968588;
+			
+			// aapt resource value: 0x7f04000d
+			public const int Fragment_Settings = 2130968589;
 			
 			static Layout()
 			{

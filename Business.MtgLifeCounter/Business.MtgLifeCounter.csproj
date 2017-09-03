@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Constants\Const.cs" />
+    <Compile Include="Context\MtgLifeCounterContext.cs" />
     <Compile Include="Enumerations\Enum.cs" />
     <Compile Include="Game\Score.cs" />
     <Compile Include="Gesture\GestureReport.cs" />
