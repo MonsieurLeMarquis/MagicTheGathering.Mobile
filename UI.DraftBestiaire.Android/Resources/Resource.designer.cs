@@ -253,8 +253,8 @@ namespace UI.DraftBestiaire.Android
 			// aapt resource value: 0x7f050006
 			public const int AboutUs = 2131034118;
 			
-			// aapt resource value: 0x7f050002
-			public const int ApplicationName = 2131034114;
+			// aapt resource value: 0x7f050001
+			public const int ApplicationName = 2131034113;
 			
 			// aapt resource value: 0x7f05000a
 			public const int Clients = 2131034122;
@@ -265,8 +265,8 @@ namespace UI.DraftBestiaire.Android
 			// aapt resource value: 0x7f050008
 			public const int Events = 2131034120;
 			
-			// aapt resource value: 0x7f050001
-			public const int Hello = 2131034113;
+			// aapt resource value: 0x7f050000
+			public const int Hello = 2131034112;
 			
 			// aapt resource value: 0x7f05000b
 			public const int Help = 2131034123;
@@ -289,8 +289,8 @@ namespace UI.DraftBestiaire.Android
 			// aapt resource value: 0x7f050003
 			public const int hello = 2131034115;
 			
-			// aapt resource value: 0x7f050000
-			public const int library_name = 2131034112;
+			// aapt resource value: 0x7f050002
+			public const int library_name = 2131034114;
 			
 			// aapt resource value: 0x7f05000e
 			public const int menu_about = 2131034126;
